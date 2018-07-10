@@ -22,30 +22,36 @@ func (q *questionimpl) CreateQuestion(c *gin.Context) {
 	if !success {
 		return
 	}
-
-	success = service.BookGenerate(req.BookId, req.GenreId)
+	
+	findBook := service.GetBookInfo(req.BookId, req.GenreId)
 	if !success {
 		response.BadRequest(gin.H{"error": "本登録に失敗しました。"}, c)
 		return
 	}
 
-	success = service.QuestionGenerate(req.BookId, req.QuestionNo, req.Sentence[0].TagId, req.Correct)
+	success = service.GetQuestionInfo(req.BookId, req.QuestionNo)
 	if !success {
 		response.BadRequest(gin.H{"error": "問題登録に失敗しました。"}, c)
 		return
 	}
 
-	success = service.SentenceGenerate(req.Sentence[0].TagId, "", req.BookId, req.QuestionNo, req.Sentence[0].Text)
+	success = service.GetSentenceInfo(req.Sentence[0].TagId)
 	if !success {
 		response.BadRequest(gin.H{"error": "問題文登録に失敗しました。"}, c)
 		return
 	}
 
-	success = service.CorrectGenerate(req)
-	if !success {
-		response.BadRequest(gin.H{"error": "回答登録に失敗しました。"}, c)
-		return
+	for i := 0 ; i < len(req.Answer); i++ {
+		if service.GetSentenceInfo(req.Answer[i].TagId) {
+			response.BadRequest(gin.H{"error": "回答登録に失敗しました。"}, c)
+			return
+		}
 	}
+	
+	service.BookGenerate(req.BookId, req.GenreId)
+	service.QuestionGenerate(req.BookId, req.QuestionNo, req.Sentence[0].TagId, req.Correct)
+	service.SentenceGenerate(req.Sentence[0].TagId, "", req.BookId, req.QuestionNo, req.Sentence[0].Text)
+	service.CorrectGenerate(req)
 	response.Json(gin.H{"success": "問題情報を登録しました。"}, c)
 }
 

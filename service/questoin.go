@@ -6,51 +6,40 @@ import (
 )
 
 // ドリル情報作成
-func BookGenerate(bookId int, genreId int) bool {
-	if getBookInfo(bookId, genreId) {
-		return false
-	}
+func BookGenerate(bookId int, genreId int) {
 	book := model.Book{
 		BookId:  bookId,
 		GenreId: genreId,
 	}
 	db.Create(&book)
-	return true
 }
 
-func getBookInfo(bookId int, genreId int) bool {
+func GetBookInfo(bookId int, genreId int) bool {
 	var books []model.Book
 	db.Where("book_id = ? and genre_id = ?", bookId, genreId).Find(&books)
 	return len(books) != 0
 }
 
 // 問題作成
-func QuestionGenerate(bookId int, questionNo int, sentece string, correct string) bool {
-	if getQuestionInfo(bookId, questionNo) {
-		return false
-	}
+func QuestionGenerate(bookId int, questionNo int, sentece string, correct string) {
 	question := model.Question{
 		BookId:     bookId,
 		QuestionNo: questionNo,
-		Sentence:   "",
-		Correct:    "",
+		Sentence:   sentece,
+		Correct:    correct,
 	}
 
 	db.Create(&question)
-	return true
 }
 
-func getQuestionInfo(bookId int, genreId int) bool {
+func GetQuestionInfo(bookId int, questionNo int) bool {
 	var questions []model.Question
-	db.Where("book_id = ? and question_no = ?", bookId, genreId).Find(&questions)
+	db.Where("book_id = ? and question_no = ?", bookId, questionNo).Find(&questions)
 	return len(questions) != 0
 }
 
 // 問題タグ
-func SentenceGenerate(tagId string, uuid string, bookId int, questionNo int, sentence string) bool {
-	if getSentenceInfo(tagId) {
-		return false
-	}
+func SentenceGenerate(tagId string, uuid string, bookId int, questionNo int, sentence string) {
 	tag := model.Tag{
 		TagId:      tagId,      // 任意のタグ番号
 		Uuid:       "",         // tagのuuid
@@ -60,25 +49,21 @@ func SentenceGenerate(tagId string, uuid string, bookId int, questionNo int, sen
 	}
 
 	db.Create(&tag) // カラム作成
-	return true
 }
 
-func getSentenceInfo(tagId string) bool {
+func GetSentenceInfo(tagId string) bool {
 	var questions []model.Tag
 	db.Where("tag_id = ?", tagId).Find(&questions)
 	return len(questions) != 0
 }
 
 // 回答タグ
-func CorrectGenerate(tagInfo validation.Question) bool {
+func CorrectGenerate(tagInfo validation.Question) {
 	var tag model.Tag
 	for i := 0; i < len(tagInfo.Answer); i++ {
-		if getSentenceInfo(tagInfo.Answer[i].TagId) {
-			return false
-		}
 		tag = model.Tag{
 			TagId:      tagInfo.Answer[i].TagId, // 任意のタグ番号
-			Uuid:       "test",                  // タグのuuid
+			Uuid:       "",                  // タグのuuid
 			BookId:     tagInfo.BookId,          // ドリルid
 			QuestionNo: tagInfo.QuestionNo,      // ドリルの問題番号
 			Answer:     tagInfo.Answer[i].Text,  // タグの回答
@@ -86,7 +71,6 @@ func CorrectGenerate(tagInfo validation.Question) bool {
 		db.Create(&tag)
 		tag = model.Tag{}
 	}
-	return true
 }
 
 // ジャンル作成
