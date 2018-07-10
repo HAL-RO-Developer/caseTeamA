@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/HAL-RO-Developer/caseTeamA_server/controller/validation"
-	"github.com/HAL-RO-Developer/caseTeamA_server/model"
+	"github.com/HAL-RO-Developer/caseTeamA/controller/validation"
+	"github.com/HAL-RO-Developer/caseTeamA/model"
 )
 
 // ドリル情報作成

@@ -11,7 +11,7 @@ import (
 
 	"net/http/httputil"
 
-	"github.com/HAL-RO-Developer/caseTeamA_server/model"
+	"github.com/HAL-RO-Developer/caseTeamA/model"
 )
 
 type GetToken struct {

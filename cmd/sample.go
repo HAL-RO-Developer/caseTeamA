@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/HAL-RO-Developer/caseTeamA_server/service"
+	"github.com/HAL-RO-Developer/caseTeamA/service"
 )
 
 func main() {

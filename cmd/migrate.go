@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/HAL-RO-Developer/caseTeamA_server/model"
+	"github.com/HAL-RO-Developer/caseTeamA/model"
 )
 
 func main() {

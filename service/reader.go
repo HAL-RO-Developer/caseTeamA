@@ -3,7 +3,7 @@ package service
 import (
 	"time"
 
-	"github.com/HAL-RO-Developer/caseTeamA_server/model"
+	"github.com/HAL-RO-Developer/caseTeamA/model"
 	"github.com/satori/go.uuid"
 	_ "github.com/satori/go.uuid"
 )
