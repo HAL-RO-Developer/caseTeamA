@@ -172,8 +172,19 @@ class Http{
         return  this.api.delete('/work/message/'+message_id)
     }
     createQuestion(data){
+        let book_id = Number(data.book_id)
+        let question_no = Number(data.question_no)
+        let sentence = data.sentence
+        let answer = data.answer
+        let genre_id = Number(data.genre) 
+        let correct = data.correct
         return  this.api.post('/question/create',{
-            data
+            book_id,
+            question_no,
+            sentence,
+            answer,
+            genre_id,
+            correct
         })
     }
     addGenre(genre_name){

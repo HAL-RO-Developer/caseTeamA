@@ -21,7 +21,7 @@
                     <button class="button is-info" type="button" @click="isComponentModalActive = true"><b-icon icon="plus"></b-icon></button>
                 </b-field>
                 <b-field>
-                    <b-input type="textarea" maxlength="140" placeholder="問題文" v-model="data.sentence.text" required></b-input>
+                    <b-input type="textarea" maxlength="140" placeholder="問題文" v-model="data.sentence[0].text" required></b-input>
                 </b-field>
                 <b-field>
                     <b-input type="text" maxlength="30" placeholder="回答1" v-model="data.answer[0].text" required></b-input>
@@ -71,16 +71,17 @@ export default {
             data:{
                 book_id: null,          // ドリルID
                 question_no: null,      // 問題No
-                sentence:{              // 問題文
+                sentence:[{              // 問題文
                     tag_id:"",          // タグID
                     text:""             // 本文
-                },
+                }],
                 answer:[                // 回答
-                    {tag_id: "", text: "", answer: false},     // 回答１(タグID, 本文)
-                    {tag_id: "", text: "", answer: false},     // 回答２(タグID, 本文)
-                    {tag_id: "", text: "", answer: false}      // 回答３(タグID, 本文)
+                    {tag_id: "", text: ""},     // 回答１(タグID, 本文)
+                    {tag_id: "", text: ""},     // 回答２(タグID, 本文)
+                    {tag_id: "", text: ""}      // 回答３(タグID, 本文)
                 ],
-                genre:null              // 分野(id)
+                genre:null,              // 分野(id)
+                correct:""
             },
             corr:"",
             options:{
@@ -98,10 +99,11 @@ export default {
     },
     methods:{
         createQuestion(){
-            this.data.sentence.tag_id = "question" + this.data.book_id + "_" + this.data.question_no
+            this.data.sentence[0].tag_id = "question" + this.data.book_id + "_" + this.data.question_no
             for(let i in this.data.answer) {
                 this.data.answer[i].tag_id = "answer" + this.data.book_id + "_" + this.data.question_no + "_" + i
-                if(i==this.corr) this.data.answer[i].answer = true
+                if(i==this.corr) 
+                    this.data.correct = this.data.answer[i].tag_id
             }            
             console.log(JSON.stringify(this.data))
             //this.clear()
@@ -128,16 +130,17 @@ export default {
             this.data = {
                 book_id: null,          // ドリルID
                 question_no: null,      // 問題No
-                sentence:{              // 問題文
+                sentence:[{              // 問題文
                     tag_id:"",          // タグID
                     text:""             // 本文
-                },
+                }],
                 answer:[                // 回答
-                    {tag_id: "", text: "", answer: false},     // 回答１(タグID, 本文)
-                    {tag_id: "", text: "", answer: false},     // 回答２(タグID, 本文)
-                    {tag_id: "", text: "", answer: false}      // 回答３(タグID, 本文)
+                    {tag_id: "", text: ""},     // 回答１(タグID, 本文)
+                    {tag_id: "", text: ""},     // 回答２(タグID, 本文)
+                    {tag_id: "", text: ""}      // 回答３(タグID, 本文)
                 ],
-                genre:null              // 分野(id)
+                genre: null,              // 分野(id)
+                correct: ""
             }
             this.corr = ""
         },
@@ -146,7 +149,6 @@ export default {
             http.addGenre(this.new_genre)
                 .then((response)=>{
                     this.$toast.open("【" + this.new_genre + "】を追加しました")
-            
                     this.getGenre()
                 })
                 .catch((err)=>{

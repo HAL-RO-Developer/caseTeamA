@@ -1,6 +1,8 @@
 package validation
 
 import (
+	"fmt"
+
 	"github.com/HAL-RO-Developer/caseTeamA/controller/response"
 	"github.com/gin-gonic/gin"
 )
@@ -26,6 +28,7 @@ type GenreInfo struct {
 func QuestionValidation(c *gin.Context) (Question, bool) {
 	var req Question
 	err := c.BindJSON(&req)
+	fmt.Println(req)
 	if err != nil {
 		response.BadRequest(gin.H{"error": "入力されていないデータがあります。"}, c)
 		return req, false
