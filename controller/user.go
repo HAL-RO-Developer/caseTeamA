@@ -5,10 +5,10 @@ import (
 
 	"strconv"
 
-	"github.com/HAL-RO-Developer/caseTeamA_server/controller/response"
-	"github.com/HAL-RO-Developer/caseTeamA_server/controller/validation"
-	"github.com/HAL-RO-Developer/caseTeamA_server/model"
-	"github.com/HAL-RO-Developer/caseTeamA_server/service"
+	"github.com/HAL-RO-Developer/caseTeamA/controller/response"
+	"github.com/HAL-RO-Developer/caseTeamA/controller/validation"
+	"github.com/HAL-RO-Developer/caseTeamA/model"
+	"github.com/HAL-RO-Developer/caseTeamA/service"
 	"github.com/gin-gonic/gin"
 	"github.com/makki0205/gojwt"
 )
