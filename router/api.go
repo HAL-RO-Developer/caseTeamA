@@ -1,8 +1,8 @@
 package router
 
 import (
-	. "github.com/HAL-RO-Developer/caseTeamA_server/controller"
-	"github.com/HAL-RO-Developer/caseTeamA_server/middleware"
+	. "github.com/HAL-RO-Developer/caseTeamA/controller"
+	"github.com/HAL-RO-Developer/caseTeamA/middleware"
 	"github.com/gin-gonic/gin"
 )
 

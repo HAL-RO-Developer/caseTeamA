@@ -1,7 +1,7 @@
 package validation
 
 import (
-	"github.com/HAL-RO-Developer/caseTeamA_server/controller/response"
+	"github.com/HAL-RO-Developer/caseTeamA/controller/response"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,14 +1,14 @@
 package validation
 
 import (
-	"github.com/HAL-RO-Developer/caseTeamA_server/controller/response"
+	"github.com/HAL-RO-Developer/caseTeamA/controller/response"
 	"github.com/gin-gonic/gin"
 )
 
 type Question struct {
 	BookId     int       `json:"book_id"`
 	QuestionNo int       `json:"question_no"`
-	Sentence   []TagInfo   `json:"sentence"`
+	Sentence   []TagInfo `json:"sentence"`
 	Answer     []TagInfo `json:"answer"`
 	Correct    string    `json:"correct"`
 	GenreId    int       `json:"genre_id"`
