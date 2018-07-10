@@ -19,6 +19,10 @@ type TagInfo struct {
 	Text  string `json:"text"`
 }
 
+type GenreInfo struct {
+	Genre string `json:"genre_name"`
+}
+
 func QuestionValidation(c *gin.Context) (Question, bool) {
 	var req Question
 	err := c.BindJSON(&req)
@@ -29,8 +33,8 @@ func QuestionValidation(c *gin.Context) (Question, bool) {
 	return req, true
 }
 
-func GenreValidation(c *gin.Context) (string, bool) {
-	var req string
+func GenreValidation(c *gin.Context) (GenreInfo, bool) {
+	var req GenreInfo
 	err := c.BindJSON(&req)
 	if err != nil {
 		response.BadRequest(gin.H{"error": "入力されていないデータがあります。"}, c)

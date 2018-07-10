@@ -55,7 +55,7 @@ func (q *questionimpl) CreateGenre(c *gin.Context) {
 	if !success {
 		return
 	}
-	success = service.GenreGenerate(req)
+	success = service.GenreGenerate(req.Genre)
 	if !success {
 		response.BadRequest(gin.H{"error": "ジャンル登録に失敗しました。"}, c)
 		return
