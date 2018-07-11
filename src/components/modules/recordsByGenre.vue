@@ -19,12 +19,7 @@ export default {
             chartData:{},
             options:{},
             values:{
-                genre:[
-                    {id: 1, name: '国語'},
-                    {id: 2, name: '算数'},
-                    {id: 3, name: '理科'},
-                    {id: 4, name: '社会'},
-                ],
+                genre:[],
                 solved:[],
                 correct:[],
                 rate:[]
@@ -69,7 +64,7 @@ export default {
 
             var labels=[];
             this.values.genre.forEach((item)=>{
-                labels.push(item.name)
+                labels.push(item.genre_name)
             })
 
             this.chartData = {
@@ -108,10 +103,29 @@ export default {
                 this.values.rate[i] = this.values.correct[i] / this.values.solved[i] * 100               
             }
             this.fillData()
-        },             
+        }, 
+        getGenre(){
+            http.getGenre()
+                .then((response)=>{
+                    Array.prototype.push.apply(this.values.genre, response.data.genre)
+                })
+                .catch((err)=>{
+                    if(err){
+                        this.$dialog.alert({
+                            title: 'Error',
+                            message: err.response.data.error,
+                            type: 'is-danger',
+                            hasIcon: true,
+                            icon: 'times-circle',
+                            iconPack: 'fa'
+                        })
+                    }
+                })
+        }            
     },
     created() {
         this.child_id = localStorage.getItem('child_id')
+        this.getGenre()
         this.aggregate()
     },
     props: ["isLoading"]
