@@ -6,6 +6,11 @@ import (
 	"github.com/HAL-RO-Developer/caseTeamA/model"
 )
 
+type Question struct {
+	BookId     int
+	QuestionNo int
+}
+
 // ユーザーごとの回答情報取得
 func ExisByRecord(name string) ([]model.Record, bool) {
 	var records []model.Record
@@ -152,4 +157,37 @@ func DeleteUserAnswer(deviceId string) bool {
 	}
 	db.Delete(records)
 	return true
+}
+
+
+// 回答数&正解数カウント
+func CountAnswerNum(record []model.Record) (int, int) {
+	var already []Question
+	var now Question
+	var correctNum int
+	answerNum := len(record)
+	for i := len(record); i > 0; i-- {
+		now.BookId = record[i - 1].BookId
+		now.QuestionNo = record[i - 1].QuestionNo
+		// 1問目の時
+		if i == len(record) {
+			if record[i - 1].Correct {
+				correctNum++
+			}
+			already = append(already, now)
+		} else {
+			for j := 0; j < len(already); j++{
+				// 同一問題を回答済みの時
+				if record[i - 1].BookId == already[j].BookId && record[i - 1].QuestionNo == already[j].QuestionNo {
+					answerNum--
+				} else {
+					if record[i - 1].Correct {
+						correctNum++
+					}
+					already = append(already, now)
+				}
+			}
+		}
+	}
+	return answerNum, correctNum
 }

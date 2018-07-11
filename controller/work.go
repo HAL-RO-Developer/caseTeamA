@@ -37,16 +37,16 @@ type recordInfo struct {
 }
 
 type recordData struct {
-	Sentence   string `json:"sentence"`
-	UserAnswer string `json:"user_answer"`
-	Correct    string `json:"correct"`
-	Result     bool   `json:"result"`
+	Date       time.Time `json:"date" sql:"type:date"`
+	Sentence   string    `json:"sentence"`
+	UserAnswer string    `json:"user_answer"`
+	Correct    string    `json:"correct"`
+	Result     bool      `json:"result"`
 }
 
 const layout = "2006-01-02"
 
 // 日付けorジャンルごとのグラフ用回答記録取得
-// Todo 同一問題を回答した時は最新の問題のみ(日付け別も)
 func (r *recordimpl) WorkRecordForGraph(c *gin.Context) {
 	var userDate []recordGraphDate
 	var userGenre []recordGraphGenre
@@ -86,13 +86,8 @@ func (r *recordimpl) WorkRecordForGraph(c *gin.Context) {
 			childRecord, find = service.GetByRecordFromDay(name, childId, recordDate.Date)
 			if !find {
 				userDate = []recordGraphDate{}
-			} else if find {
-				recordDate.NumAns = len(childRecord)
-				for j := 0; len(childRecord) > j; j++ {
-					if childRecord[j].Correct {
-						recordDate.NumCorr++
-					}
-				}
+			} else {
+				recordDate.NumAns, recordDate.NumCorr = service.CountAnswerNum(childRecord)
 				userDate = append(userDate, recordDate)
 				recordDate = recordGraphDate{}
 			}
@@ -102,23 +97,16 @@ func (r *recordimpl) WorkRecordForGraph(c *gin.Context) {
 		return
 	}
 	number := service.GetGenreNumber()
-	for i := 1; i < number; i++ {
-		childRecord, find = service.GetByRecordFromGenre(name, childId, i)
+	for i := 0; i < number; i++ {
+		childRecord, find = service.GetByRecordFromGenre(name, childId, i+1)
 		if !find {
 			userGenre = []recordGraphGenre{}
-		}
-		buf := service.GetGenreData(i)
-		recordGenre.Genre = buf[0].GenreName
-		recordGenre.BookId = childRecord[i].BookId
-
-		recordGenre.NumProblems = service.GetByQuestion(childRecord[i].BookId)
-		if find {
-			recordGenre.NumAns = len(childRecord)
-			for j := 0; len(childRecord) > j; j++ {
-				if childRecord[j].Correct {
-					recordGenre.NumCorr++
-				}
-			}
+		} else {
+			buf := service.GetGenreData(i + 1)
+			recordGenre.Genre = buf[0].GenreName
+			recordGenre.BookId = childRecord[i].BookId
+			recordGenre.NumProblems = service.GetByQuestion(childRecord[i].BookId)
+			recordGenre.NumAns, recordGenre.NumCorr = service.CountAnswerNum(childRecord)
 			userGenre = append(userGenre, recordGenre)
 			recordGenre = recordGraphGenre{}
 		}
@@ -188,6 +176,7 @@ func (r *recordimpl) WorkRecordForDetail(c *gin.Context) {
 	} else {
 		for i := 0; i < len(childRecord); i++ {
 			tagData = service.GetTagDataFromBookId(childRecord[i].BookId, childRecord[i].QuestionNo)
+			detail.Date = tagData[0].UpdatedAt
 			detail.Sentence = tagData[0].Sentence
 			detail.UserAnswer = childRecord[i].UserAnswer
 			correctId = service.GetByCorrect(childRecord[i].BookId, childRecord[i].QuestionNo)
