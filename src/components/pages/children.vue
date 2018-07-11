@@ -12,7 +12,7 @@
                 @remove="removeChild"
                 @select="select"></card>
         </div>
-        <fab :icon="fabIcon" @click="isComponentModalActive = true"></fab>
+        <fab icon="plus" @click="isComponentModalActive = true"></fab>
         <app-footer></app-footer>
         <under-tab :index='2'></under-tab>
         <b-modal :active.sync="isComponentModalActive" has-modal-card>
@@ -44,7 +44,6 @@ export default {
     data() {
         return {
             title: "子ども一覧",
-            fabIcon: "plus",
             children: [],
             selected: "",
             isComponentModalActive: false,

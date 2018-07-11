@@ -21,7 +21,7 @@
                 </card>
             </div>
         </div>
-        <fab :icon="fabIcon" @click="getDevice"></fab>
+        <fab icon="sync" @click="getDevice"></fab>
         <app-footer></app-footer>
         <under-tab :index='0'></under-tab>
     </div>
@@ -50,7 +50,6 @@ export default {
             child_id: "",
             pin: "",
             devices: {},
-            fabIcon: "sync",
             isLoading: false,
         }
     },

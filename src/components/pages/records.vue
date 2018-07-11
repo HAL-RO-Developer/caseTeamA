@@ -10,7 +10,7 @@
             <by-date ref="date" v-if="filter=='date'" :isLoading="isLoading" @isLoading="isLoading=false"></by-date>
             <by-genre ref="genre" v-if="filter=='genre'" :isLoading="isLoading" @isLoading="isLoading=false"></by-genre>
         </div>
-        <fab :icon="fabIcon" @click="getRecords"></fab>    
+        <fab icon="sync" @click="getRecords"></fab>    
         <app-footer></app-footer>
         <under-tab :index='1'></under-tab>
     </div>
@@ -40,7 +40,6 @@ export default {
             child_id: "",
             filter: "date",
             records: [],
-            fabIcon: "sync",
             options:{
                 filter:[
                     {name: '日付別', value: 'date'},
