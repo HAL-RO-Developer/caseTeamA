@@ -31,6 +31,7 @@ type recordGraphGenre struct {
 }
 
 type recordInfo struct {
+	Nickname  string       `json:"nickname"`
 	Date      time.Time    `json:"date" sql:"type:date"`
 	GenreName string       `json:"genre_name"`
 	Detail    []recordData `json:"detail"`
@@ -137,6 +138,11 @@ func (r *recordimpl) WorkRecordForDetail(c *gin.Context) {
 		return
 	}
 
+	childInfo, find := service.GetOneOfChild(name, childId)
+	if !find {
+		response.Json(gin.H{"records": "登録されていない子ども情報です。"}, c)
+		return
+	}
 	day := c.DefaultQuery("date", "")
 	date, err := time.Parse(layout, day)
 	hoge := c.DefaultQuery("genre", "")
@@ -153,6 +159,7 @@ func (r *recordimpl) WorkRecordForDetail(c *gin.Context) {
 		}
 	}
 
+	childDetail.Nickname = childInfo[0].NickName
 	if day != "" && hoge == "" {
 		childRecord, find = service.GetByRecordFromDay(name, childId, date)
 		if find {
@@ -176,7 +183,7 @@ func (r *recordimpl) WorkRecordForDetail(c *gin.Context) {
 	} else {
 		for i := 0; i < len(childRecord); i++ {
 			tagData = service.GetTagDataFromBookId(childRecord[i].BookId, childRecord[i].QuestionNo)
-			detail.Date = tagData[0].UpdatedAt
+			detail.Date = childRecord[i].UpdatedAt
 			detail.Sentence = tagData[0].Sentence
 			detail.UserAnswer = childRecord[i].UserAnswer
 			correctId = service.GetByCorrect(childRecord[i].BookId, childRecord[i].QuestionNo)
