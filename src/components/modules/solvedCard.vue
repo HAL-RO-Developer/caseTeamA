@@ -8,7 +8,8 @@
                     </figure>
                 </div>
                 <div class="media-content">
-                    <p class="title is-6">{{sentence}}</p>
+                    <p class="title is-6">{{detail.sentence}}</p>
+                    <p class="subtitle is-6">回答日時：{{date}}</p>   
                 </div>
             </div>
         </div>
@@ -16,10 +17,12 @@
 </template>
 
 <script>
+    import moment from "moment"
     export default {
         data() {
             return {
-                icon:{}
+                icon: {},
+                date: null
             }
         },
         methods:{
@@ -29,14 +32,32 @@
         },
         
         created(){
-            this.icon = ( this.result ) ? {
+            this.icon = ( this.detail.result ) ? {
                 icon: "circle-outline",
                 type: "is-info"
             } : {
                 icon: "close",
                 type: "is-danger"
             }
+            this.date = moment(this.detail.date).format("YYYY/MM/DD HH:mm:ss")
         },
-        props:['sentence','result']
+        props:['detail']
     }
 </script>
+
+<style>
+    .card{
+        position: relative;
+    }
+    .media-content{
+        overflow: auto;
+        width: auto;
+    }
+    .media-content .title{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .media-content .subtitle{
+        text-align: right;
+    }
+</style>

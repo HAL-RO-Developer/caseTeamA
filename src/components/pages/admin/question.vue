@@ -165,7 +165,7 @@ export default {
                 })
         },
         getGenre(){
-            http.getGenre(this.new_genre)
+            http.getGenre()
                 .then((response)=>{
                     this.options.genre = response.data.genre
                 })

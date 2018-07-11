@@ -15,9 +15,9 @@
                 <b-select placeholder="Select a genre" v-model="genre" @input="getDetail(child_id,date,genre)" expanded>
                     <option
                         v-for="option in options.genre"
-                        :value="option.id"
-                        :key="option.id">
-                        {{ option.name }}
+                        :value="option.genre_id"
+                        :key="option.genre_id">
+                        {{ option.genre_name }}
                     </option>
                 </b-select>
             </b-field>
@@ -25,8 +25,7 @@
                 <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
                 <card v-for="(detail, index) in records.detail" 
                     :key="index"
-                    :sentence="detail.sentence" 
-                    :result="detail.result"
+                    :detail="detail"
                     @select="showDatail(index)">
                 </card>
             </div>
@@ -34,7 +33,7 @@
         <app-footer></app-footer>
         <under-tab :index='1'></under-tab>
         <b-modal :active.sync="isComponentModalActive" has-modal-card>
-            <modal-form :detail="modalData"></modal-form>
+            <modal-form :detail="modalData" nickname="hoge"></modal-form>
         </b-modal>
     </div>
 </template>
@@ -68,9 +67,7 @@ export default {
             modalData:{},
             options: {
                 genre:[
-                    {id: null, name: '全て'},
-                    {id: 1, name: '算数'},
-                    {id: 2, name: '社会'}
+                    {genre_id: null, genre_name: '全て'}
                 ]
             }
         }
@@ -109,12 +106,31 @@ export default {
         showDatail(index){
             this.modalData = this.records.detail[index]
             this.isComponentModalActive = true
+        },
+        getGenre(){
+            http.getGenre()
+                .then((response)=>{
+                    Array.prototype.push.apply(this.options.genre, response.data.genre)
+                })
+                .catch((err)=>{
+                    if(err){
+                        this.$dialog.alert({
+                            title: 'Error',
+                            message: err.response.data.error,
+                            type: 'is-danger',
+                            hasIcon: true,
+                            icon: 'times-circle',
+                            iconPack: 'fa'
+                        })
+                    }
+                })
         }
     },
     created() {
         this.child_id = localStorage.getItem('child_id')
         this.date = moment(this.$route.params.date,'MMDD').format('YYYY-MM-DD')
         this.getDetail(this.child_id,this.date)
+        this.getGenre()
     }
 }
 </script>
