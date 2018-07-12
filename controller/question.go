@@ -51,7 +51,7 @@ func (q *questionimpl) CreateQuestion(c *gin.Context) {
 	if !findBook {
 		service.BookGenerate(req.BookId, req.GenreId)
 	}
-	service.QuestionGenerate(req.BookId, req.QuestionNo, req.Sentence[0].TagId, req.Correct)
+	service.QuestionGenerate(req.BookId, req.QuestionNo,req.GenreId, req.Sentence[0].TagId, req.Correct)
 	service.SentenceGenerate(req.Sentence[0].TagId, "", req.BookId, req.QuestionNo, req.Sentence[0].Text)
 	service.CorrectGenerate(req)
 	response.Json(gin.H{"success": "問題情報を登録しました。"}, c)

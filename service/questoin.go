@@ -21,10 +21,11 @@ func GetBookInfo(bookId int, genreId int) bool {
 }
 
 // 問題作成
-func QuestionGenerate(bookId int, questionNo int, sentece string, correct string) {
+func QuestionGenerate(bookId int, questionNo int, genreId int, sentece string, correct string) {
 	question := model.Question{
 		BookId:     bookId,
 		QuestionNo: questionNo,
+		GenreId:    genreId,
 		Sentence:   sentece,
 		Correct:    correct,
 	}
@@ -63,7 +64,7 @@ func CorrectGenerate(tagInfo validation.Question) {
 	for i := 0; i < len(tagInfo.Answer); i++ {
 		tag = model.Tag{
 			TagId:      tagInfo.Answer[i].TagId, // 任意のタグ番号
-			Uuid:       "",                  // タグのuuid
+			Uuid:       "",                      // タグのuuid
 			BookId:     tagInfo.BookId,          // ドリルid
 			QuestionNo: tagInfo.QuestionNo,      // ドリルの問題番号
 			Answer:     tagInfo.Answer[i].Text,  // タグの回答

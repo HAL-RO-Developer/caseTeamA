@@ -21,6 +21,7 @@ type Question struct {
 	Model
 	BookId     int    `json:"book_id"`
 	QuestionNo int    `json:"question_no"`
+	GenreId    int    `json:"genre_id"`
 	Sentence   string `json:"sentence"` // TagId
 	Correct    string `json:"correct"`  // TagId
 }

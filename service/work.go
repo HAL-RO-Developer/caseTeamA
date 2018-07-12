@@ -60,9 +60,9 @@ func GetByCorrect(bookId int, questionNo int) string {
 }
 
 // BookIdの問題数を取得
-func GetByQuestion(bookId int) int {
+func GetByQuestion(genreId int) int {
 	var question []model.Question
-	db.Where("book_id = ?", bookId).Find(&question)
+	db.Where("genre_id = ?", genreId).Find(&question)
 
 	return len(question)
 }
@@ -165,8 +165,11 @@ func CountAnswerNum(record []model.Record) (int, int) {
 	var already []Question
 	var now Question
 	var correctNum int
+	var i int
+	
+	recordNum := len(record)
 	answerNum := len(record)
-	for i := len(record); i > 0; i-- {
+	for i = recordNum; i > 0; i-- {
 		now.BookId = record[i - 1].BookId
 		now.QuestionNo = record[i - 1].QuestionNo
 		// 1問目の時
@@ -176,18 +179,27 @@ func CountAnswerNum(record []model.Record) (int, int) {
 			}
 			already = append(already, now)
 		} else {
-			for j := 0; j < len(already); j++{
-				// 同一問題を回答済みの時
-				if record[i - 1].BookId == already[j].BookId && record[i - 1].QuestionNo == already[j].QuestionNo {
-					answerNum--
-				} else {
-					if record[i - 1].Correct {
-						correctNum++
-					}
-					already = append(already, now)
+			if judgeQuestion(record[i - 1].BookId, record[i - 1].QuestionNo, already) {
+				answerNum--
+			} else {
+				if record[i - 1].Correct {
+					correctNum++
 				}
+				already = append(already, now)
 			}
 		}
+		now = Question{}
 	}
 	return answerNum, correctNum
+}
+
+// 同一問題を回答済みか？
+func judgeQuestion(bookId int, questionNo int, already []Question) bool {
+	for i := 0; i < len(already); i++ {
+		// 同一問題を回答済みの時
+		if (bookId == already[i].BookId) && (questionNo == already[i].QuestionNo) {
+			return true
+		}
+	}
+	return false
 }

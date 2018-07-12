@@ -24,7 +24,6 @@ type recordGraphDate struct {
 
 type recordGraphGenre struct {
 	Genre       string `json:"genre"`
-	BookId      int    `json:"book_id"`
 	NumProblems int    `json:"num_problems"`
 	NumAns      int    `json:"num_ans"`
 	NumCorr     int    `json:"num_corr"`
@@ -54,6 +53,7 @@ func (r *recordimpl) WorkRecordForGraph(c *gin.Context) {
 	var recordDate recordGraphDate
 	var recordGenre recordGraphGenre
 	var childRecord []model.Record
+	//var genreNum int
 	num := 0
 
 	name, ok := authorizationCheck(c)
@@ -104,8 +104,7 @@ func (r *recordimpl) WorkRecordForGraph(c *gin.Context) {
 		} else {
 			buf := service.GetGenreData(i + 1)
 			recordGenre.Genre = buf[0].GenreName
-			recordGenre.BookId = childRecord[i].BookId
-			recordGenre.NumProblems = service.GetByQuestion(childRecord[i].BookId)
+			recordGenre.NumProblems = service.GetByQuestion(i + 1)
 			recordGenre.NumAns, recordGenre.NumCorr = service.CountAnswerNum(childRecord)
 			userGenre = append(userGenre, recordGenre)
 			recordGenre = recordGraphGenre{}
