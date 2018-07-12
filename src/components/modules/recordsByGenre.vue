@@ -20,6 +20,7 @@ export default {
             options:{},
             values:{
                 genre:[],
+                problem:[],
                 solved:[],
                 correct:[],
                 rate:[]
@@ -28,6 +29,7 @@ export default {
     },
     methods:{
         fillData () {
+            var problem_data = this.values.problem
             var solved_data = this.values.solved
             var correct_data = this.values.correct    
             var rate_data = this.values.rate          
@@ -96,8 +98,9 @@ export default {
                 this.values.rate[i] = 0
                 records.forEach((record)=>{
                     if(Number(record.genre)==this.values.genre[i].id){
-                        this.values.solved[i] = Number(record.solved)
-                        this.values.correct[i] = Number(record.correct)
+                        this.values.problem[i] = Number(record.num_problem)
+                        this.values.solved[i] = Number(record.num_ans)
+                        this.values.correct[i] = Number(record.num_corr)
                     }
                 })
                 this.values.rate[i] = this.values.correct[i] / this.values.solved[i] * 100               
