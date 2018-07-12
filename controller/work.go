@@ -101,7 +101,6 @@ func (r *recordimpl) WorkRecordForGraph(c *gin.Context) {
 	for i := 0; i < number; i++ {
 		childRecord, find = service.GetByRecordFromGenre(name, childId, i+1)
 		if !find {
-			userGenre = []recordGraphGenre{}
 		} else {
 			buf := service.GetGenreData(i + 1)
 			recordGenre.Genre = buf[0].GenreName
@@ -185,7 +184,8 @@ func (r *recordimpl) WorkRecordForDetail(c *gin.Context) {
 			tagData = service.GetTagDataFromBookId(childRecord[i].BookId, childRecord[i].QuestionNo)
 			detail.Date = childRecord[i].UpdatedAt
 			detail.Sentence = tagData[0].Sentence
-			detail.UserAnswer = childRecord[i].UserAnswer
+			tagInfo := service.GetTagDataFromTagId(childRecord[i].UserAnswer)
+			detail.UserAnswer = tagInfo.Answer
 			correctId = service.GetByCorrect(childRecord[i].BookId, childRecord[i].QuestionNo)
 			if correctId == "" {
 				response.BadRequest(gin.H{"error": "問題が見つかりませんでした。"}, c)

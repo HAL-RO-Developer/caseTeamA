@@ -67,7 +67,7 @@ func SendUserAnswer(deviceId string, tagUuid string, oldUuid string) (model.Reco
 				BookId:     tagInfo.BookId,
 				QuestionNo: tagInfo.QuestionNo,
 				GenreId:    genreId[0].GenreId,
-				UserAnswer: tagInfo.Answer,
+				UserAnswer: tagUuid,
 				Correct:    correct,
 			}
 			err := db.Create(&record).Error
