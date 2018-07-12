@@ -8,7 +8,7 @@ import SolvedList from './components/pages/solvedList.vue'
 import Settings from './components/pages/settings.vue'
 import Children from './components/pages/children.vue'
 import Messages from './components/pages/messages.vue'
-import Manual from './components/pages/Manual.vue'
+// import Manual from './components/pages/Manual.vue'
 import NotFound from './components/pages/notFound.vue'
 import Admin from './components/pages/admin/admin.vue'
 import CreateQues from './components/pages/admin/question.vue'
@@ -27,7 +27,7 @@ const routes = [
     { path: "/settings", component: Settings }, 
     { path: "/children", component: Children },
     { path: "/messages", component: Messages },
-    { path: "/manual", component: Manual },
+    // { path: "/manual", component: Manual },
     { path: "/admin", component: Admin},
     { path: "/admin/question", component: CreateQues },
     { path: "*", component: NotFound },

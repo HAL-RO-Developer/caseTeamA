@@ -109,5 +109,3 @@ main
 index.bundle.js.map
 index.bundle.js
 config.yml
-
-node_modules/
