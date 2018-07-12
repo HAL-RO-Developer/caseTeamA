@@ -33,7 +33,7 @@
         <app-footer></app-footer>
         <under-tab :index='1'></under-tab>
         <b-modal :active.sync="isComponentModalActive" has-modal-card>
-            <modal-form :detail="modalData" nickname="hoge"></modal-form>
+            <modal-form :detail="modalData" :nickname="records.nickname"></modal-form>
         </b-modal>
     </div>
 </template>
