@@ -93,11 +93,12 @@ export default {
         aggregate(records){
             this.records = this.records
             for( var i = 0; i < this.values.genre.length; i++){
+                console.log(this.values.genre[i].genre_name)
                 this.values.solved[i] = 0
                 this.values.correct[i] = 0
                 this.values.rate[i] = 0
                 records.forEach((record)=>{
-                    if(Number(record.genre)==this.values.genre[i].id){
+                    if(record.genre==this.values.genre[i].genre_name){
                         this.values.problem[i] = Number(record.num_problem)
                         this.values.solved[i] = Number(record.num_ans)
                         this.values.correct[i] = Number(record.num_corr)
@@ -129,7 +130,6 @@ export default {
     created() {
         this.child_id = localStorage.getItem('child_id')
         this.getGenre()
-        this.aggregate()
     },
     props: ["isLoading"]
 }
