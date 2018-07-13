@@ -4,7 +4,11 @@
             <div class="media">
                 <div class="media-left">
                     <figure class="image is-48x48">
-                        <b-icon :icon="icon.icon" size="is-large" :type="icon.type"></b-icon>
+                        <b-icon 
+                            :icon="this.child.sex ? 'gender-female'  : 'gender-male'"
+                            :type="this.child.sex ? 'is-danger'      : 'is-info'"
+                            size="is-large">    
+                        </b-icon>
                     </figure>
                 </div>
                 <div class="media-content">
@@ -35,19 +39,9 @@
             },
             select(){
                 this.$emit('select', this.child.child_id )
-            },
-            selectIcon(){
-                this.icon = ( this.child.sex ) ? {
-                    icon: "gender-female",
-                    type: "is-danger"
-                } : {
-                    icon: "gender-male",
-                    type: "is-info"
-                }
-            },
+            }
         },
         created(){
-            this.selectIcon()
         },
         props:['selected','child']
     }
