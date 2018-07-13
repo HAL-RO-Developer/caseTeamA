@@ -3,7 +3,7 @@
             <div slot="trigger" slot-scope="props" class="card-header">
                 <p class="card-header-title">
                     <span v-if="condition==3">{{messageCall}}回</span>
-                    {{target.name}}
+                    {{find().name}}
                 </p>
                 <a class="card-header-icon">
                     <b-icon
@@ -35,7 +35,6 @@
     export default {
         data() {
             return {
-                target:{},
                 options: {
                     condition:[
                         {id: 1, name: '正解のとき'},
@@ -50,14 +49,13 @@
             remove(id,message){
                 this.$emit('remove', id,message )
             },
-            find(){
-                this.target = this.options.condition.find((item, index)=>{
+            find(){ 
+                return this.options.condition.find((item, index)=>{
                     if (item.id == this.condition) return true;
                 });
             }
         },
         created() {
-            this.find()
         },
         props:['condition', 'messageCall','messages']
     }
