@@ -22,7 +22,7 @@
                             <b-icon icon="pencil"></b-icon>
                         </button>
                         -->
-                        <button class="button is-danger" @click="remove(message.message_id)">
+                        <button class="button is-danger" @click="remove(message.message_id,message.message)">
                             <b-icon icon="delete"></b-icon>
                         </button>
                     </div>
@@ -47,14 +47,17 @@
         },
         methods:{
             edit(){},
-            remove(id){
-                this.$emit('remove', id )
+            remove(id,message){
+                this.$emit('remove', id,message )
+            },
+            find(){
+                this.target = this.options.condition.find((item, index)=>{
+                    if (item.id == this.condition) return true;
+                });
             }
         },
         created() {
-            this.target = this.options.condition.find((item, index)=>{
-                if (item.id == this.condition) return true;
-            });
+            this.find()
         },
         props:['condition', 'messageCall','messages']
     }

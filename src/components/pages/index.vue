@@ -1,14 +1,31 @@
 <template>
-    <side-bar></side-bar>
+    <div>
+        <under-tab :index='1'></under-tab>
+    </div>
 </template>
 
 <script>
-import SideBar from '../modules/sidebar.vue'
+import http from '../../service/service';
+import UnderTab from '../modules/underTab.vue'
 
 export default {
-  name: "index",
-  components: {
-    SideBar
-  }
+    name :"dashboad",
+    components:{
+        UnderTab
+    },
+    data() {
+        return {
+        }
+    },
+    methods:{
+        
+    },
+    created(){
+        if(!http.GetToken()){
+            this.$router.push({ path: '/login' })
+        }else{
+            this.$router.push({ path: '/device' })
+        }
+    }
 }
 </script>

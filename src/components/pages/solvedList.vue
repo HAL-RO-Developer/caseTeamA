@@ -77,7 +77,6 @@ export default {
             this.isLoading = true
             http.getDetail(child_id, date, genre)
                 .then((response)=>{
-                    console.log(response.data)
                     this.isLoading = false
                     this.records = response.data.records
                 })

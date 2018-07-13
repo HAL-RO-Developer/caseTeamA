@@ -3,7 +3,7 @@
         <app-header :title='title'></app-header>        
         <div class="contents">
             <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
-            <card v-for="(message, index) in messages.child_messages" 
+            <card ref="card" v-for="(message, index) in messages.child_messages" 
                 :key="index"
                 :condition="message.condition"
                 :messageCall="message.message_call"
@@ -83,10 +83,7 @@
                     .then((response)=>{
                         this.isLoading = false
                         this.messages = response.data.messages
-                        console.log("messages")
-                        console.log(this.messages)
-                        console.log("messages.child_messages")
-                        console.log(this.messages.child_messages)
+                        //this.$ref.card.find()
                     })
                     .catch((err)=>{
                         this.isLoading = false
@@ -110,10 +107,10 @@
                         }
                     });
             },
-            removeMessage(id){
+            removeMessage(id,message){
                 this.$dialog.confirm({
                 title: 'メッセージ削除',
-                message: '『'+ id +'』を削除しますか？',
+                message: '『'+ message +'』を削除しますか？',
                 confirmText: '削除',
                 type: 'is-danger',
                 hasIcon: true,

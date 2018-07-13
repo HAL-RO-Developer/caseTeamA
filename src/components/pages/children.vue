@@ -5,10 +5,8 @@
             <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
             <card v-for="(child, index) in children" 
                 :key="index"
-                :id="child.child_id"
-                :nickname="child.nickname" 
-                :sex="child.sex"
                 :selected="selected"
+                :child="child"
                 @remove="removeChild"
                 @select="select"></card>
         </div>
@@ -55,8 +53,8 @@ export default {
             this.isLoading = true
             http.getChild()
                 .then((response)=>{
-                    console.log(response)
                     this.isLoading = false
+                    this.children = []
                     this.children = response.data.children
                 })
                 .catch((err)=>{

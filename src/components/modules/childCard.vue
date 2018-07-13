@@ -8,10 +8,10 @@
                     </figure>
                 </div>
                 <div class="media-content">
-                    <p class="title is-4">{{nickname}}</p>
-                    <!--<p class="subtitle is-6">ID:{{id}}</p>-->
+                    <p class="title is-4">{{child.nickname}}</p>
+                    <!--<p class="subtitle is-6">ID:{{child.child_id}}</p>-->
                 </div>
-                <b-icon v-if="selected==id" icon="check"></b-icon>
+                <b-icon v-if="selected==child.child_id" icon="check"></b-icon>
                 <div class="media-right">
                     <button class="button is-danger" @click="remove">
                         <b-icon icon="delete"></b-icon>
@@ -31,21 +31,24 @@
         },
         methods:{
             remove(){
-                this.$emit('remove', this.id, this.nickname )
+                this.$emit('remove', this.child.child_id, this.child.nickname )
             },
             select(){
-                this.$emit('select', this.id )
-            }
+                this.$emit('select', this.child.child_id )
+            },
+            selectIcon(){
+                this.icon = ( this.child.sex ) ? {
+                    icon: "gender-female",
+                    type: "is-danger"
+                } : {
+                    icon: "gender-male",
+                    type: "is-info"
+                }
+            },
         },
         created(){
-            this.icon = ( this.sex ) ? {
-                icon: "gender-female",
-                type: "is-danger"
-            } : {
-                icon: "gender-male",
-                type: "is-info"
-            }
+            this.selectIcon()
         },
-        props:['id','nickname','sex','selected']
+        props:['selected','child']
     }
 </script>

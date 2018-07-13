@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import dashboad from './components/pages/dashboad.vue'
+import Index from './components/pages/index.vue'
 import Login from './components/pages/login.vue'
 import Device from './components/pages/device.vue'
 import Records from './components/pages/records.vue'
@@ -19,7 +19,7 @@ Vue.use(Buefy)
 Vue.use(VueRouter)
 
 const routes = [
-    { path: "/", component: dashboad },
+    { path: "/", component: Index },
     { path: "/login" , component: Login },
     { path: "/device", component: Device },
     { path: "/records", component: Records },
