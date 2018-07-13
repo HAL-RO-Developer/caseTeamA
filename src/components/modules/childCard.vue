@@ -9,7 +9,7 @@
                 </div>
                 <div class="media-content">
                     <p class="title is-4">{{nickname}}</p>
-                    <p class="subtitle is-6">ID:{{id}}</p>
+                    <!--<p class="subtitle is-6">ID:{{id}}</p>-->
                 </div>
                 <b-icon v-if="selected==id" icon="check"></b-icon>
                 <div class="media-right">

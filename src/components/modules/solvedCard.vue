@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div id="c-solved" class="card">
         <div class="card-content" @click="select">
             <div class="media">
                 <div class="media-left">
@@ -57,7 +57,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
     }
-    .media-content .subtitle{
+    #c-solved .media-content .subtitle{
         text-align: right;
     }
 </style>
