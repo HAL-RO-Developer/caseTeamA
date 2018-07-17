@@ -93,7 +93,6 @@ export default {
         aggregate(records){
             this.records = this.records
             for( var i = 0; i < this.values.genre.length; i++){
-                console.log(this.values.genre[i].genre_name)
                 this.values.solved[i] = 0
                 this.values.correct[i] = 0
                 this.values.rate[i] = 0

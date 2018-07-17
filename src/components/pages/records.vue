@@ -3,10 +3,14 @@
         <app-header :title='title'></app-header>
         <div class="contents">
             <b-field>
+                <b-select placeholder="Select a child" v-model="child_id" @input="getRecords"> 
+                    <option v-for="option in options.children" :key="option.child_id" :value="option.child_id">{{option.nickname}}</option>
+                </b-select>
                 <b-select placeholder="Select a filter" v-model="filter" @input="getRecords"> 
                     <option v-for="option in options.filter" :key="option.value" :value="option.value">{{option.name}}</option>
                 </b-select>
             </b-field>
+            
             <by-date ref="date" v-if="filter=='date'" :isLoading="isLoading" @isLoading="isLoading=false"></by-date>
             <by-genre ref="genre" v-if="filter=='genre'" :isLoading="isLoading" @isLoading="isLoading=false"></by-genre>
         </div>
@@ -44,7 +48,8 @@ export default {
                 filter:[
                     {name: '日付別', value: 'date'},
                     {name: '分野別', value: 'genre'}
-                ]
+                ],
+                children:[]
             },
             isLoading: false
         }
@@ -54,7 +59,6 @@ export default {
             this.isLoading = true
             http.getRecords(this.child_id,this.filter)
                 .then((response)=>{
-                    //this.isLoading = false
                     this.records = response.data.records
                     if(this.filter=="date"){
                         this.$refs.date.aggregate(this.records)
@@ -83,10 +87,39 @@ export default {
                         }
                     }
                 });
-        }
+        },
+        getChild(){
+            http.getChild()
+                .then((response)=>{
+                    this.options.children = response.data.children
+                })
+                .catch((err)=>{
+                    this.isLoading = false
+                    if(err){
+                        this.$dialog.alert({
+                            title: 'Error',
+                            message: err.response.data.error,
+                            type: 'is-danger',
+                            hasIcon: true,
+                            icon: 'times-circle',
+                            iconPack: 'fa'
+                        })
+                        switch(err.response.status){
+                            case 401:
+                                http.RemoveToken()
+                                this.$router.push({path:'/'})
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+        },
+        
     },
     created() {
         this.child_id = localStorage.getItem('child_id')
+        this.getChild()
         this.getRecords()
     }
 }

@@ -3,6 +3,7 @@
         <div class="modal-card" style="width: auto">
             <header class="modal-card-head">
                 <p class="modal-card-title">ログイン</p>
+                <!--<p><img src="/image/logo.png"></p>-->
             </header>
             <section class="modal-card-body">
                 <b-field label="Name">
@@ -29,6 +30,7 @@
                 <button class="button" type="button" @click="signup">新規登録</button>
                 <button class="button" type="button" @click="signin">ログイン</button>
             </footer>
+            <p><img src="/image/bocco.png"></p>
         </div>
     </form>
 </template>
