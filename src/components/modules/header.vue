@@ -1,6 +1,6 @@
 <template>
     <header id="app-header" class="modal-card-head">
-        <p class="modal-card-title">{{title}}</p>
+        <p class="modal-card-title"><img src="/image/bocco_w.png">{{title}}</p>
     </header>
 </template>
 
@@ -25,5 +25,8 @@ export default {
         left:0px;
         margin: 0px;
         margin-bottom: 5%;
+    }
+    #app-header img{
+       padding: 0;
     }
 </style>
