@@ -4,7 +4,7 @@
         <div class="contents">
             <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
             <b-field>
-                <b-select placeholder="Select a child" v-model="child_id" @input="getMessage"> 
+                <b-select placeholder="Select a child" v-model="child_id" @input="getMessage"expanded> 
                     <option v-for="option in options.children" :key="option.child_id" :value="option.child_id">{{option.nickname}}</option>
                 </b-select>
             </b-field>
