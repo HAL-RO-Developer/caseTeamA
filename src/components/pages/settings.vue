@@ -3,11 +3,15 @@
         <app-header :title='title'></app-header>
         <div class="contents">
             <div class="buttons" v-for="item in menu_items" :key="item.id">
-                <span class="button full-width" @click="click(item.id)">{{item.title}}</span>
+                <span class="button is-medium full-width" @click="click(item.id)">
+                    <b-icon :icon="item.icon"></b-icon>
+                    <span style="padding-left:.5vh;">{{item.title}}</span>
+                </span>
             </div>
         </div>
-        <app-footer></app-footer>
         <under-tab :index='2'></under-tab>
+        <app-footer></app-footer>
+        
     </div>
 </template>
 <script>
@@ -27,10 +31,10 @@ export default {
         return {
             title:"設定",
             menu_items: [
-                { id:1, title:'子ども一覧' },
-                { id:2, title:'メッセージ設定' },
-                { id:3, title:'取扱説明書'},
-                { id:4, title:'ログアウト' }
+                { id:1, title:'子ども一覧', icon:'human-child' },
+                { id:2, title:'メッセージ設定', icon:'message-outline' },
+                //{ id:3, title:'取扱説明書' icon:'note'},
+                { id:4, title:'ログアウト', icon:'logout-variant'}
             ]
         }
     },

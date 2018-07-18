@@ -2,7 +2,10 @@
     <div class="modal-card" style="width: auto">
         <app-header :title='title'></app-header>
         <div class="contents">
-            <button class="button is-medium is-primary full-width" type="button" @click="registDevice">PINコード発行</button>
+            <button class="button is-medium is-success full-width" type="button" @click="registDevice">
+                <b-icon icon="code-greater-than"></b-icon>
+                <span style="padding-left:0.2vh;"> PINコード発行</span>
+            </button>
             <section class="modal-card-body">
                 <b-input
                     type="text"
@@ -174,6 +177,5 @@ export default {
     .list{
         position: relative;
         overflow: auto;
-        height: 43vh;
     }
 </style>

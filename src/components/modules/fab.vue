@@ -33,8 +33,8 @@
         width: 55px;
         height: 55px;
         position:fixed;
-        right: 5vw;
-        bottom: 10vh;
+        right: 3vw;
+        bottom: 20vh;
         border-radius: 50%;
         z-index: 10;
         box-shadow:0px 3px 10px rgba(0,0,0, 0.3);

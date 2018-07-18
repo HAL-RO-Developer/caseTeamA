@@ -48,26 +48,33 @@ export default {
 
 
 <style>
-  #undertab {
-    position: relative;
-  }
-  
-  .b-tabs{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    height: 8vh;
-  }
+    #undertab {
+        position: relative;
+    }
 
-  .b-tabs .tabs{
-  }
+    .b-tabs{
+        position: fixed;
+        left: 0;
+        bottom: 10vh;
+        height: 8vh;
+    }
 
-  .b-tabs .tabs a{
-    font-size: 1.25rem;
-    height: 8vh;
-  }
+    .b-tabs .tabs a{
+        font-size: 1.25rem;
+        height: 8vh;   
+    }
 
-  .b-tabs .tab-content{ 
-    padding: 0;
-  }
+    .b-tabs .tab-content{ 
+        padding: 0;
+    }
+
+    .tabs.is-toggle li.is-active a {
+        background-color: #88CC29;
+        border-color: #88CC29;
+    }
+
+    .tabs.is-toggle li:first-child a,
+    .tabs.is-toggle li:last-child a{
+        border-radius: 0;
+    }
 </style>

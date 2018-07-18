@@ -3,6 +3,11 @@
         <app-header :title='title'></app-header>        
         <div class="contents">
             <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
+            <b-field>
+                <b-select placeholder="Select a child" v-model="child_id" @input="getMessage"> 
+                    <option v-for="option in options.children" :key="option.child_id" :value="option.child_id">{{option.nickname}}</option>
+                </b-select>
+            </b-field>
             <card ref="card" v-for="(message, index) in messages.child_messages" 
                 :key="index"
                 :condition="message.condition"
@@ -36,7 +41,7 @@
             AppFooter,
             Card,
             ModalForm,
-            Fab
+            Fab,
         },
         data() {
             return {
@@ -45,7 +50,10 @@
                 fabIcon: "plus",
                 isComponentModalActive: false,
                 isLoading: false,
-                messages:[]
+                messages:[],
+                options:{
+                    children:[]
+                },
             }
         },
         methods:{
@@ -77,8 +85,11 @@
                         }
                     });
             },
-            getMessage(){
+            getMessage(id){
                 this.isLoading = true
+                if(id!=null){
+                    this.child_id = id;
+                }
                 http.getMessage(this.child_id)
                     .then((response)=>{
                         this.isLoading = false
@@ -141,10 +152,38 @@
                             }
                         })
                 })
-            }
+            },
+            getChild(){
+            http.getChild()
+                .then((response)=>{
+                    this.options.children = response.data.children
+                })
+                .catch((err)=>{
+                    this.isLoading = false
+                    if(err){
+                        this.$dialog.alert({
+                            title: 'Error',
+                            message: err.response.data.error,
+                            type: 'is-danger',
+                            hasIcon: true,
+                            icon: 'times-circle',
+                            iconPack: 'fa'
+                        })
+                        switch(err.response.status){
+                            case 401:
+                                http.RemoveToken()
+                                this.$router.push({path:'/'})
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+        },
         },
         created(){
             this.child_id = localStorage.getItem('child_id')
+            this.getChild()
             this.getMessage()
         }
     }
