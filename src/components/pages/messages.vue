@@ -71,8 +71,7 @@
                                 message: err.response.data.error,
                                 type: 'is-danger',
                                 hasIcon: true,
-                                icon: 'times-circle',
-                                iconPack: 'fa'
+                                icon: 'alert-circle',
                             })
                             switch(err.response.status){
                                 case 401:
@@ -104,8 +103,7 @@
                                 message: err.response.data.error,
                                 type: 'is-danger',
                                 hasIcon: true,
-                                icon: 'times-circle',
-                                iconPack: 'fa'
+                                icon: 'alert-circle',
                             })
                             switch(err.response.status){
                                 case 401:
@@ -138,8 +136,7 @@
                                     message: err.response.data.error,
                                     type: 'is-danger',
                                     hasIcon: true,
-                                    icon: 'times-circle',
-                                    iconPack: 'fa'
+                                    icon: 'alert-circle',
                                 })
                                 switch(err.response.status){
                                     case 401:
@@ -166,8 +163,7 @@
                             message: err.response.data.error,
                             type: 'is-danger',
                             hasIcon: true,
-                            icon: 'times-circle',
-                            iconPack: 'fa'
+                            icon: 'alert-circle',
                         })
                         switch(err.response.status){
                             case 401:
