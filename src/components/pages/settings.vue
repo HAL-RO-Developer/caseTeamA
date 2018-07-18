@@ -9,6 +9,7 @@
                 </span>
             </div>
         </div>
+        <!--<img class="illust" src="/image/drill.png">-->
         <under-tab :index='2'></under-tab>
         <app-footer></app-footer>
         
@@ -61,4 +62,13 @@ export default {
 </script>
 
 <style>
+    .illust{
+        position: fixed;
+        right: -3vw;
+        bottom: 20vh;
+        width: 40vw;
+        -webkit-transform: rotate(15deg);
+        -ms-transform: rotate(15deg);
+        transform: rotate(15deg);
+    }
 </style>

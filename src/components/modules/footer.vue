@@ -1,6 +1,7 @@
 <template>
     <footer id="app-footer" class="modal-card-foot">
         <p>ユカイ工学 × HAL大阪</p>
+        <!--<p><img src="/image/logo_yukai.png"><img src="/image/logo_hal.png"></p>-->
         <div class="buttons has-addons">
             <!--<span class="button" @click="$router.go(-1)">戻る</span>-->
         </div>
@@ -41,6 +42,10 @@ export default {
         height:100%;
         justify-content: center;
         align-items: center;
+    }
+
+    #app-footer img{
+        height: auto;
     }
 
     #app-footer .buttons{

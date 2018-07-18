@@ -35,6 +35,8 @@
                     <span style="padding-left:.5vh;"> ログイン</span>
                 </button>
             </div>
+            <img class="illust-left" src="/image/bocco.png">
+            <!--<img class="illust-right" src="/image/drill.png">-->
             <app-footer></app-footer>
         </div>
     </form>
@@ -120,3 +122,25 @@ export default {
     }
 }
 </script>
+
+<style>
+    .illust-left{
+        position: fixed;
+        left: 1vw;
+        bottom: 9vh;
+        height: 30vh;
+        -webkit-transform: rotate(15deg);
+        -ms-transform: rotate(15deg);
+        transform: rotate(15deg);
+        filter: drop-shadow(3px 0 2px #999999);
+    }
+    .illust-right{
+        position: fixed;
+        right: -3vw;
+        top: 3vh;
+        width: 30vw;
+        -webkit-transform: rotate(15deg);
+        -ms-transform: rotate(15deg);
+        transform: rotate(15deg);
+    }
+</style>
