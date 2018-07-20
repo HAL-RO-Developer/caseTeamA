@@ -28,11 +28,11 @@ export default {
     },
     created(){
         if(!http.GetToken()){
-            this.$router.push({ path: '/login' })
+            this.$router.push({ path: '/pages/login' })
         }else if(!localStorage.getItem('child_id')){
-            this.$router.push({ path: '/children' })
+            this.$router.push({ path: '/pages/children' })
         }else{
-            this.$router.push({ path: '/records' })
+            this.$router.push({ path: '/pages/records' })
         }
     }
 }

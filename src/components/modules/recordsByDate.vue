@@ -89,7 +89,7 @@ export default {
         showSolvedList(e,el){
             if (! el || el.length == 0) return;
             var date = moment(el[0]._model.label,"MM/DD").format("MMDD")
-            this.$router.push({path: '/records/date/' + date})
+            this.$router.push({path: '/pages/records/date/' + date})
         },
         aggregate(records,date){
             this.records = records

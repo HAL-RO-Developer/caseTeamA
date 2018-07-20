@@ -147,7 +147,7 @@ export default {
         select(id){
             localStorage.setItem('child_id', id)
             this.selected = id
-            this.$router.push({path: '/records'}) 
+            this.$router.push({path: '/pages/records'}) 
         }
     },
     created(){

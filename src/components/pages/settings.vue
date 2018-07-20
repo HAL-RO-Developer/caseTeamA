@@ -44,16 +44,16 @@ export default {
         click(id){
             switch (id) {
                 case 1:
-                    this.$router.push({path:"/children"})
+                    this.$router.push({path:"/pages/children"})
                     break;
                 case 2:
-                    this.$router.push({path:"/messages"})
+                    this.$router.push({path:"/pages/messages"})
                     break;
                 case 3:
-                    this.$router.push({path:"/manual"})
+                    this.$router.push({path:"/pages/manual"})
                     break;
                 case 4:
-                    this.$router.push({path:"/bocco"})
+                    this.$router.push({path:"/pages/bocco"})
                     break;
                 default:
                     http.RemoveToken()

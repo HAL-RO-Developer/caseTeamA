@@ -24,13 +24,13 @@ export default {
             // this.$router.push({path:"/login"})
             switch (this.IndexModel) {
                 case 0:
-                    this.$router.push({path:"/device"})
+                    this.$router.push({path:"/pages/device"})
                     break;
                 case 1:
-                    this.$router.push({path:"/records"})
+                    this.$router.push({path:"/pages/records"})
                     break;
                 case 2:
-                    this.$router.push({path:"/settings"})
+                    this.$router.push({path:"/pages/settings"})
                     break;
                 default:
                     break;

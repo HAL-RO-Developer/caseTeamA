@@ -21,17 +21,17 @@ Vue.use(VueRouter)
 
 const routes = [
     { path: "/", component: Index },
-    { path: "/login" , component: Login },
-    { path: "/device", component: Device },
-    { path: "/records", component: Records },
-    { path: "/records/date/:date", component: SolvedList },
-    { path: "/settings", component: Settings }, 
-    { path: "/children", component: Children },
-    { path: "/messages", component: Messages },
-    { path: "/bocco", component: Bocco},
-    // { path: "/manual", component: Manual },
-    { path: "/admin", component: Admin},
-    { path: "/admin/question", component: CreateQues },
+    { path: "/pages/login" , component: Login },
+    { path: "/pages/device", component: Device },
+    { path: "/pages/records", component: Records },
+    { path: "/pages/records/date/:date", component: SolvedList },
+    { path: "/pages/settings", component: Settings }, 
+    { path: "/pages/children", component: Children },
+    { path: "/pages/messages", component: Messages },
+    { path: "/pages/bocco", component: Bocco},
+    // { path: "/pages/manual", component: Manual },
+    { path: "/pages/admin", component: Admin},
+    { path: "/pages/admin/question", component: CreateQues },
     { path: "*", component: NotFound },
 ]
 const router = new VueRouter({  mode: 'history', routes })

@@ -9,7 +9,7 @@
                 <b-select placeholder="Select a filter" v-model="filter" @input="getRecords"> 
                     <option v-for="option in options.filter" :key="option.value" :value="option.value">{{option.name}}</option>
                 </b-select>
-                <button class="button message-button is-success" @click="$router.push({path: '/messages'})">
+                <button class="button message-button is-success" @click="$router.push({path: '/pages/messages'})">
                     <b-icon icon="message-outline"></b-icon>
                     <!--<span style="padding-left:.5vh;">メッセージ設定</span>-->
                 </button>
