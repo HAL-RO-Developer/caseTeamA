@@ -12,7 +12,7 @@
 export default {
     data() {
         return {
-            IndexModel: 1
+            IndexModel: null
         }
     },
     created(){
@@ -40,7 +40,7 @@ export default {
     props:{
         "index":{
             type :Number,
-            default:0
+            default:null
         }
     }
 }
@@ -55,7 +55,7 @@ export default {
     .b-tabs{
         position: fixed;
         left: 0;
-        bottom: 10vh;
+        bottom: 8vh;
         height: 8vh;
     }
 

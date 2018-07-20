@@ -1,7 +1,10 @@
 <template>
     <footer id="app-footer" class="modal-card-foot">
-        <p>ユカイ工学 × HAL大阪</p>
-        <!--<p><img src="/image/logo_yukai.png"><img src="/image/logo_hal.png"></p>-->
+        <p>
+            <img src="/image/logo_yukai.png">
+            <b-icon icon="close"/>
+            <img src="/image/logo_hal.png">
+        </p>
         <div class="buttons has-addons">
             <!--<span class="button" @click="$router.go(-1)">戻る</span>-->
         </div>
@@ -24,12 +27,13 @@ export default {
         display: block;
         position: fixed;
         width: 100vw;
-        height: 10vh;
+        height: 8vh;
         padding: 0vh;
         bottom: 0vh;
         border-top:0;
         left:0px;
         background-color: #88CC29;
+        z-index: 10;
     }
 
     .modal-card-foot {
@@ -56,5 +60,9 @@ export default {
     #app-footer .buttons .button{
         height: 6vh;
         margin: 2vh;
+    }
+
+    #app-footer img{
+        height: 75%;
     }
 </style>
