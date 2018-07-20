@@ -35,6 +35,7 @@
         box-shadow:0px 3px 10px rgba(0,0,0, 0.3);
         -webkit-box-shadow: 0px 3px 10px rgba(0,0,0, 0.3);
         transition: transform 0.3s ease-out;
+        z-index: 30;
     }
     
     #fab:active{

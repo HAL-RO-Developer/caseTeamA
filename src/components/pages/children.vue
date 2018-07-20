@@ -83,7 +83,9 @@ export default {
             var birthday = moment(data.birthday)
             http.addChild(data.nickname, birthday.format("YYYY-MM-DD"), Number(data.sex))
                 .then((response)=>{
-                    this.getChild()
+                    //this.getChild()
+                    this.$toast.open(data.nickname+'を追加しました')
+                    this.$router.push({path: '/pages/device' })
                 })
                 .catch((err)=>{
                     if(err){
