@@ -93,7 +93,6 @@ func GetRoomId(token string, childId int) (string, bool) {
 	}
 
 	roomId := data.([]interface{})[childId - 1].(map[string]interface{})["uuid"].(string)
-	
 	return roomId, true
 }
 

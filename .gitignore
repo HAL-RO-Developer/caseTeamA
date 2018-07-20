@@ -108,5 +108,6 @@ Temporary Items
 main
 index.bundle.js.map
 index.bundle.js
+node_modules
 config.yml
 apiKey.go

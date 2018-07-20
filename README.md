@@ -242,7 +242,6 @@ BOCCOAPIに登録したメールアドレスと、パスワードの入力
 
     + Attribute
         + email: sample@gmail.com
-        + key : sample - APIkey
         + pass: abc123
 
 + Response 200 (application/json)
