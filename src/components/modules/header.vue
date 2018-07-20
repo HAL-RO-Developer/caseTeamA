@@ -28,7 +28,6 @@ export default {
         margin: 0px;        
         padding: 0vh;
         background-color: #88CC29;
-        z-index: 10;
     }
 
     .modal-card-head {

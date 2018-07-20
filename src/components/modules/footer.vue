@@ -33,7 +33,6 @@ export default {
         border-top:0;
         left:0px;
         background-color: #88CC29;
-        z-index: 10;
     }
 
     .modal-card-foot {

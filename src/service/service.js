@@ -195,6 +195,18 @@ class Http{
     getGenre(){
         return  this.api.get('/question/genre')
     }
+    connectBocco(email, pass){
+        return  this.api.post('/bocco',{
+            email,
+            pass
+        })
+    }
+    disconnectBocco(){
+        return  this.api.delete('/bocco')
+    }
+    getBocco(){
+        return  this.api.get('/bocco')
+    }
 }
 var http = new Http()
 export default http;
