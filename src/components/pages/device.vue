@@ -35,7 +35,7 @@ import http from '../../service/service';
 import UnderTab from '../modules/underTab.vue'
 import AppHeader from '../modules/header.vue'
 import AppFooter from '../modules/footer.vue'
-import Card from '../modules/deviceCard.vue'
+import Card from '../modules/devices/card.vue'
 import Fab from '../modules/fab.vue'
 
 export default {

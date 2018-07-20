@@ -43,8 +43,8 @@ import http from '../../service/service';
 import UnderTab from '../modules/underTab.vue'
 import AppHeader from '../modules/header.vue'
 import AppFooter from '../modules/footer.vue'
-import Card from '../modules/solvedCard.vue'
-import ModalForm from '../modules/detailModal.vue'
+import Card from '../modules/records/details/card.vue'
+import ModalForm from '../modules/records/details/modal.vue'
 
 export default {
     name :"solved-list",

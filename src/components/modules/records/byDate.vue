@@ -13,9 +13,9 @@
 </template>
 <script>
 import moment from "moment";
-import http from '../../service/service';
-import Graph from '../modules/graph.vue'
-import Fab from '../modules/fab.vue'
+import http from '../../../service/service';
+import Graph from './graph.vue'
+import Fab from '../../modules/fab.vue'
 
 export default {
     components:{

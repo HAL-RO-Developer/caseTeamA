@@ -25,8 +25,8 @@ import http from '../../service/service';
 import UnderTab from '../modules/underTab.vue'
 import AppHeader from '../modules/header.vue'
 import AppFooter from '../modules/footer.vue'
-import Card from '../modules/childCard.vue'
-import ModalForm from '../modules/addChildModal.vue'
+import Card from '../modules/children/card.vue'
+import ModalForm from '../modules/children/modal.vue'
 import Fab from '../modules/fab.vue'
 
 export default {

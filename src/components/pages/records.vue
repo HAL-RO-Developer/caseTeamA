@@ -28,8 +28,8 @@ import UnderTab from '../modules/underTab.vue'
 import AppHeader from '../modules/header.vue'
 import AppFooter from '../modules/footer.vue'
 import Fab from '../modules/fab.vue'
-import ByDate from '../modules/recordsByDate.vue'
-import ByGenre from '../modules/recordsByGenre.vue'
+import ByDate from '../modules/records/byDate.vue'
+import ByGenre from '../modules/records/byGenre.vue'
 
 export default {
     name :"records",

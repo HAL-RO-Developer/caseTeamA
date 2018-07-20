@@ -29,8 +29,8 @@
     import UnderTab from '../modules/underTab.vue'
     import AppHeader from '../modules/header.vue'
     import AppFooter from '../modules/footer.vue'
-    import Card from '../modules/messageCard.vue'
-    import ModalForm from '../modules/addMessageModal.vue'
+    import Card from '../modules/messages/card.vue'
+    import ModalForm from '../modules/messages/modal.vue'
     import Fab from '../modules/fab.vue'
 
     export default {
