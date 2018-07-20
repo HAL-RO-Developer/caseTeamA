@@ -37,7 +37,6 @@ type Record struct {
 	GenreId    int       `json:"genre_id"`
 	UserAnswer string    `json:"user_answer"` // ユーザーの回答
 	Correct    bool      `json:"correct"`
-	Challenge  int       `json:"challenge"` // チャレンジ実行タイプ
 }
 
 // タグ情報
@@ -48,6 +47,7 @@ type Tag struct {
 	BookId     int    `json:"book_id"`
 	QuestionNo int    `json:"question_no"`
 	Sentence   string `json:"sentence"`
+	Phonetic   string `json:"phonetic"`
 	Answer     string `json:"answer"`
 }
 
@@ -60,4 +60,11 @@ type CustomMessage struct {
 	Conditions  int    `json:"conditions"` // メッセージ発信条件
 	MessageCall int    `json:"message_call"`
 	Message     string `json:"message"` // メッセージ内容
+}
+
+// メッセージ
+type DefaultMessage struct {
+	Model
+	MsgCondition int    `json:"msg_condition"` // メッセージ発信条件
+	Message      string `json:"message"`       // メッセージ内容
 }

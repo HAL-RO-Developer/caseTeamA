@@ -40,7 +40,6 @@ type Device struct {
 type Bocco struct {
 	Model
 	Name  string `json:"name"`
-	Key   string `json:"key"`
 	Email string `json:"email"`
 	Pass  string `json:"pass"`
 }

@@ -40,13 +40,14 @@ func GetQuestionInfo(bookId int, questionNo int) bool {
 }
 
 // 問題タグ
-func SentenceGenerate(tagId string, uuid string, bookId int, questionNo int, sentence string) {
+func SentenceGenerate(tagId string, bookId int, questionNo int, sentence string, phonetic string) {
 	tag := model.Tag{
 		TagId:      tagId,      // 任意のタグ番号
 		Uuid:       "",         // tagのuuid
 		BookId:     bookId,     // ドリルId
 		QuestionNo: questionNo, // ドリルの問題番号
 		Sentence:   sentence,   // 問題文
+		Phonetic:   phonetic,
 	}
 
 	db.Create(&tag) // カラム作成

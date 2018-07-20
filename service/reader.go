@@ -10,15 +10,15 @@ import (
 
 // ユーザーの回答データ送信
 func SendUserAnswer(deviceId string, tagUuid string, oldUuid string) (model.Record, int) {
-	var correct bool
 	var record model.Record
+	var oldTag *model.Tag
 	deviceInfo, find := GetDeviceInfoFromDeviceId(deviceId)
 	if !find {
 		return model.Record{}, -1
 	}
 
 	if oldUuid != "" {
-		oldTag := GetTagDataFromUuid(tagUuid)
+		oldTag = GetTagDataFromUuid(tagUuid)
 		if oldTag == nil {
 			return model.Record{}, -2
 		}
@@ -31,57 +31,82 @@ func SendUserAnswer(deviceId string, tagUuid string, oldUuid string) (model.Reco
 
 	// 問題タグ時
 	if tagInfo.Sentence != "" {
-		if tagUuid != oldUuid {
-			tagInfo.Sentence = "前回の問題を回答してね"
+		if oldUuid != "" {
+			if judgeSentenceTag(oldTag.Uuid) {
+				tagInfo.Sentence = "前回の問題を回答してね"
+			}
 		}
+
 		bocco, find := GetDeviceInfoFromDeviceId(deviceId)
 		if !find {
 			return model.Record{}, -4
 		}
 		boccoInfo, find := ExisByBoccoAPI(bocco[0].Name)
 		if find {
-			boccoToken, _ := GetBoccoToken(boccoInfo[0].Email, boccoInfo[0].Key, boccoInfo[0].Pass)
+			boccoToken, _ := GetBoccoToken(boccoInfo[0].Email, APIKEY, boccoInfo[0].Pass)
 			roomId, _ := GetRoomId(boccoToken)
 			uuid := uuid.Must(uuid.NewV4()).String()
-			SendMessage(uuid, roomId, boccoToken, tagInfo.Sentence)
+			SendMessage(uuid, roomId, boccoToken, tagInfo.Phonetic)
 		}
+		return record, 4
 	} else {
-		oldTagInfo := GetTagDataFromUuid(oldUuid)
-		// 前回uuidが答えの時もしくは今回のuuidが前回の回答の時
-		if oldTagInfo.Answer != "" || (oldTagInfo.BookId == tagInfo.BookId && oldTagInfo.QuestionNo == tagInfo.QuestionNo) {
-			genreId := GetBookData(tagInfo.BookId)
-			correctId := GetByCorrect(tagInfo.BookId, tagInfo.QuestionNo)
-			if correctId == "" {
-				return model.Record{}, -5
-			}
-
-			if tagInfo.Uuid == tagUuid {
-				correct = true
-			} else {
-				correct = false
-			}
-			record = model.Record{
-				Name:       deviceInfo[0].Name,
-				ChildId:    deviceInfo[0].ChildId,
-				AnswerDay:  time.Now(),
-				BookId:     tagInfo.BookId,
-				QuestionNo: tagInfo.QuestionNo,
-				GenreId:    genreId[0].GenreId,
-				UserAnswer: tagUuid,
-				Correct:    correct,
-			}
+		if oldUuid == "" {
+			record = createRecord(deviceInfo[0].Name, deviceInfo[0].ChildId, tagInfo.BookId, tagInfo.QuestionNo, tagUuid)
 			err := db.Create(&record).Error
 			if err != nil {
 				return model.Record{}, -6
 			}
-
-			if !correct {
-				return record, 0
+			if !record.Correct {
+				return record, 2
+			}
+		} else if oldTag.Answer != "" || ((oldTag.BookId == tagInfo.BookId && oldTag.QuestionNo == tagInfo.QuestionNo) && oldTag.Answer == "") {
+			record = createRecord(deviceInfo[0].Name, deviceInfo[0].ChildId, tagInfo.BookId, tagInfo.QuestionNo, tagUuid)
+			err := db.Create(&record).Error
+			if err != nil {
+				return model.Record{}, -6
+			}
+			if !record.Correct {
+				return record, 2
 			}
 		} else {
 			return model.Record{}, 3
 		}
 	}
-
 	return record, 1
+}
+
+// 問題タグか?
+func judgeSentenceTag(tagId string) bool {
+	var tags []model.Question
+	db.Where("sentence = ?", tagId).Find(&tags)
+	return len(tags) != 0
+
+}
+
+// 回答記録作成
+func createRecord(name string, childId int, bookId int, questionNo int, tagUuid string) model.Record {
+	var correct bool
+	var record model.Record
+
+	genreId := GetBookData(bookId)
+	correctId := GetByCorrect(bookId, questionNo)
+	if correctId == "" {
+		return model.Record{}
+	}
+	if correctId == tagUuid {
+		correct = true
+	} else {
+		correct = false
+	}
+	record = model.Record{
+		Name:       name,
+		ChildId:    childId,
+		AnswerDay:  time.Now(),
+		BookId:     bookId,
+		QuestionNo: questionNo,
+		GenreId:    genreId[0].GenreId,
+		UserAnswer: tagUuid,
+		Correct:    correct,
+	}
+	return record
 }

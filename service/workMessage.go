@@ -1,8 +1,6 @@
 package service
 
 import (
-	"fmt"
-
 	"github.com/HAL-RO-Developer/caseTeamA/controller/validation"
 	"github.com/HAL-RO-Developer/caseTeamA/model"
 )
@@ -77,7 +75,6 @@ func GetWorkMessageFromNameChild(name string, childId int) ([]model.CustomMessag
 func GetMessageInfoFromSame(name string, childId int, condition int, messageCall int) ([]model.CustomMessage, bool) {
 	var messages []model.CustomMessage
 	db.Where("name = ? and child_id = ? and conditions = ? and message_call = ?", name, childId, condition, messageCall).Find(&messages)
-	fmt.Println(messages)
 	return messages, len(messages) != 0
 }
 
@@ -88,7 +85,8 @@ func GetMessageInfoFromTrue(name string, childId int, result int) ([]model.Custo
 	return messages, len(messages) != 0
 }
 
-// メッセージID作成"
+
+// メッセージID作成
 func CreateWorkMessageId() string {
 	var messageId string
 	for {

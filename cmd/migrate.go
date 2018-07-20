@@ -17,6 +17,7 @@ func main() {
 	db.DropTableIfExists(&model.Record{})
 	db.DropTableIfExists(&model.Tag{})
 	db.DropTableIfExists(&model.CustomMessage{})
+	db.DropTableIfExists(&model.DefaultMessage{})
 
 	db.AutoMigrate(&model.User{})
 	db.AutoMigrate(&model.UserChild{})
@@ -28,4 +29,5 @@ func main() {
 	db.AutoMigrate(&model.Record{})
 	db.AutoMigrate(&model.Tag{})
 	db.AutoMigrate(&model.CustomMessage{})
+	db.AutoMigrate(&model.DefaultMessage{})
 }

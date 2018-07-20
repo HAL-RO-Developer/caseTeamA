@@ -1,8 +1,6 @@
 package service
 
 import (
-	"time"
-
 	"github.com/HAL-RO-Developer/caseTeamA/model"
 )
 
@@ -55,7 +53,7 @@ func GetChildInfo(name string) ([]model.UserChild, bool) {
 }
 
 // 子ども情報特定
-func GetOneOfChild(name string, childId int)([]model.UserChild, bool) {
+func GetOneOfChild(name string, childId int) ([]model.UserChild, bool) {
 	var children []model.UserChild
 	err := db.Where("name = ? and child_id = ?", name, childId).Find(&children).Error
 	if err != nil {
@@ -63,6 +61,7 @@ func GetOneOfChild(name string, childId int)([]model.UserChild, bool) {
 	}
 	return children, true
 }
+
 // 最初に見つけたこどもID情報削除
 func DeleteChildFirst(name string) bool {
 	var child model.UserChild
@@ -83,11 +82,4 @@ func DeleteChild(name string, childId int) bool {
 	}
 	db.Delete(&child)
 	return true
-}
-
-func bGetDateUser(date time.Time) []model.User {
-	var user []model.User
-	//day := date.Format("2006-01-02")
-	db.Where("created_at = ?", date).Find(&user)
-	return user
 }

@@ -17,8 +17,9 @@ type Question struct {
 }
 
 type TagInfo struct {
-	TagId string `json:"tag_id"`
-	Text  string `json:"text"`
+	TagId    string `json:"tag_id"`
+	Text     string `json:"text"`
+	Phonetic string `json:"phonetic"`
 }
 
 type GenreInfo struct {

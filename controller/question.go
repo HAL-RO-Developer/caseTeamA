@@ -22,7 +22,7 @@ func (q *questionimpl) CreateQuestion(c *gin.Context) {
 	if !success {
 		return
 	}
-	
+
 	genreData := service.GetGenreData(req.GenreId)
 	if len(genreData) == 0 {
 		response.BadRequest(gin.H{"error": "そのジャンルIDは存在しません。"}, c)
@@ -41,18 +41,18 @@ func (q *questionimpl) CreateQuestion(c *gin.Context) {
 		return
 	}
 
-	for i := 0 ; i < len(req.Answer); i++ {
+	for i := 0; i < len(req.Answer); i++ {
 		if service.GetSentenceInfo(req.Answer[i].TagId) {
 			response.BadRequest(gin.H{"error": "回答登録に失敗しました。"}, c)
 			return
 		}
 	}
-	
+
 	if !findBook {
 		service.BookGenerate(req.BookId, req.GenreId)
 	}
-	service.QuestionGenerate(req.BookId, req.QuestionNo,req.GenreId, req.Sentence[0].TagId, req.Correct)
-	service.SentenceGenerate(req.Sentence[0].TagId, "", req.BookId, req.QuestionNo, req.Sentence[0].Text)
+	service.QuestionGenerate(req.BookId, req.QuestionNo, req.GenreId, req.Sentence[0].TagId, req.Correct)
+	service.SentenceGenerate(req.Sentence[0].TagId, req.BookId, req.QuestionNo, req.Sentence[0].Text, req.Sentence[0].Phonetic)
 	service.CorrectGenerate(req)
 	response.Json(gin.H{"success": "問題情報を登録しました。"}, c)
 }

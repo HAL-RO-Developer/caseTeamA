@@ -159,30 +159,29 @@ func DeleteUserAnswer(deviceId string) bool {
 	return true
 }
 
-
 // 回答数&正解数カウント
 func CountAnswerNum(record []model.Record) (int, int) {
 	var already []Question
 	var now Question
 	var correctNum int
 	var i int
-	
+
 	recordNum := len(record)
 	answerNum := len(record)
 	for i = recordNum; i > 0; i-- {
-		now.BookId = record[i - 1].BookId
-		now.QuestionNo = record[i - 1].QuestionNo
+		now.BookId = record[i-1].BookId
+		now.QuestionNo = record[i-1].QuestionNo
 		// 1問目の時
 		if i == len(record) {
-			if record[i - 1].Correct {
+			if record[i-1].Correct {
 				correctNum++
 			}
 			already = append(already, now)
 		} else {
-			if judgeQuestion(record[i - 1].BookId, record[i - 1].QuestionNo, already) {
+			if judgeQuestion(record[i-1].BookId, record[i-1].QuestionNo, already) {
 				answerNum--
 			} else {
-				if record[i - 1].Correct {
+				if record[i-1].Correct {
 					correctNum++
 				}
 				already = append(already, now)
@@ -202,4 +201,42 @@ func judgeQuestion(bookId int, questionNo int, already []Question) bool {
 		}
 	}
 	return false
+}
+
+// 連続正解数
+func GetContinueCorrect(record []model.Record) int {
+	var i int
+	var correct int
+	recordNum := len(record)
+
+	for i = recordNum; i > 0; i-- {
+		if record[i-1].Correct {
+			correct++
+		} else {
+			break
+		}
+	}
+	return correct
+}
+
+// 連続実行日数
+func GetContinueRun(record []model.Record) int {
+	var i int
+	var run int
+	var buf time.Time
+	recordNum := len(record)
+
+	for i = recordNum; i > 0; i-- {
+		if record[i-1].AnswerDay.Format("2006-01-02") == time.Now().Format("2006-01-02") {
+			run = 1
+			buf = record[i-1].AnswerDay
+		} else if record[i-1].AnswerDay.Format("2006-01-02") == buf.Format("2006-01-02") {
+
+		} else if record[i-1].AnswerDay.Format("2006-01-02") == buf.AddDate(0, 0, -1).Format("2006-01-02") {
+			run++
+		} else {
+			break
+		}
+	}
+	return run
 }

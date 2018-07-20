@@ -31,13 +31,13 @@ func (b *boccoimpl) RegistBocco(c *gin.Context) {
 		return
 	}
 
-	_, ok = service.GetBoccoToken(req.Email, req.Key, req.Password)
+	_, ok = service.GetBoccoToken(req.Email, service.APIKEY, req.Password)
 	if !ok {
 		response.BadRequest(gin.H{"error": "アクセストークンが取得できませんでした。"}, c)
 		return
 	}
 
-	err := service.RegistrationBoccoInfo(name, req.Email, req.Key, req.Password)
+	err := service.RegistrationBoccoInfo(name, req.Email, req.Password)
 
 	if err != nil {
 		response.BadRequest(gin.H{"error": "データベースエラー"}, c)

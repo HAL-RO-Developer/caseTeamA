@@ -5,6 +5,7 @@ import (
 
 	"github.com/HAL-RO-Developer/caseTeamA/controller/validation"
 	"github.com/HAL-RO-Developer/caseTeamA/model"
+	"strconv"
 )
 
 // 子ども情報取得
@@ -50,4 +51,11 @@ func AddChild(name string, info validation.UserChildren) (int, bool) {
 		return 0, false
 	}
 	return childId, true
+}
+
+// 年齢計算
+func CalcAge(birthday time.Time) int {
+	day, _ := strconv.Atoi(birthday.Format("20060102"))
+	now, _ := strconv.Atoi(time.Now().Format("20060102"))
+	return (now - day) / 10000
 }

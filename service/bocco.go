@@ -124,11 +124,10 @@ func SendMessage(uuid string, roomId string, token string, text string) bool {
 }
 
 // BoccoAPI情報登録
-func RegistrationBoccoInfo(name string, email string, key string, pass string) error {
+func RegistrationBoccoInfo(name string, email string, pass string) error {
 	bocco := model.Bocco{
 		Name:  name,
 		Email: email,
-		Key:   key,
 		Pass:  pass,
 	}
 	err := db.Create(&bocco).Error
