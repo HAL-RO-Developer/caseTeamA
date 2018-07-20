@@ -6,7 +6,7 @@
 </template>
 <script>
 import http from '../../../service/service';
-import Graph from './graph.vue'
+import Graph from './graph/radar.vue'
 import Fab from '../../modules/fab.vue'
 
 export default {
@@ -56,7 +56,7 @@ export default {
                 */
                 {
                     label: '正答率',
-                    type: 'bar',
+                    type: 'radar',
                     data: rate_data,
                     borderColor: "rgba(254,97,132,0.8)",
                     backgroundColor: "rgba(254,97,132,0.5)",
@@ -75,17 +75,12 @@ export default {
             }
 
             this.options = {
-                scales:{
-                    yAxes:[
-                        {
-                            id: "count-axis",
-                            position: "left",
-                            ticks:{
-                                min: 0,
-                                max: 100,
-                            }
-                        }
-                    ],
+                scale:{
+                    ticks:{
+                        min: 0,
+                        max: 100,
+                        beginAtZero: true
+                    }
                 },
             }
             this.$emit('isLoading')
