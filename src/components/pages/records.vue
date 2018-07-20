@@ -2,13 +2,17 @@
     <div class="modal-card" style="width: auto">
         <app-header :title='title'></app-header>
         <div class="contents">
-            <b-field>
+            <b-field class="form">
                 <b-select placeholder="Select a child" v-model="child_id" @input="getRecords"> 
                     <option v-for="option in options.children" :key="option.child_id" :value="option.child_id">{{option.nickname}}</option>
                 </b-select>
                 <b-select placeholder="Select a filter" v-model="filter" @input="getRecords"> 
                     <option v-for="option in options.filter" :key="option.value" :value="option.value">{{option.name}}</option>
                 </b-select>
+                <button class="button message-button is-success" @click="$router.push({path: '/messages'})">
+                    <b-icon icon="message-outline"></b-icon>
+                    <!--<span style="padding-left:.5vh;">メッセージ設定</span>-->
+                </button>
             </b-field>
             
             <by-date ref="date" v-if="filter=='date'" :isLoading="isLoading" @isLoading="isLoading=false"></by-date>
@@ -57,6 +61,7 @@ export default {
     methods:{
         getRecords(){
             this.isLoading = true
+            localStorage.setItem('child_id', this.child_id)
             http.getRecords(this.child_id,this.filter)
                 .then((response)=>{
                     this.records = response.data.records
@@ -124,4 +129,11 @@ export default {
 </script>
 
 <style>
+    .contents .form{
+        width: auto;
+    }
+
+    .message-button{
+            left: 3vw;
+    }
 </style>

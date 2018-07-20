@@ -1,9 +1,9 @@
 <template>
     <div>
         <b-field grouped group-multiline>
-            <div class="is-left"><span class="button" @click="prev">＜</span></div>
-            <div class="is-center"><b-input type="text" v-model="values.week_range" readonly></b-input></div>
-            <div class="is-right"><span class="button" @click="next">＞</span></div>
+            <div class="prev"><span class="button" @click="prev"><b-icon icon="chevron-left"/></span></div>
+            <div class="range"><b-input type="text" v-model="values.week_range" readonly></b-input></div>
+            <div class="next"><span class="button" @click="next"><b-icon icon="chevron-right"/></span></div>
         </b-field>
         <div style="position:relative;">
             <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
@@ -128,4 +128,17 @@ export default {
 </script>
 
 <style>
+    .prev .button,
+    .next .button{
+        width: 10vw;
+    }
+
+    .range{
+        width: 65vw;
+    }
+
+    .range .input{
+        text-align: center;
+    }
+    
 </style>

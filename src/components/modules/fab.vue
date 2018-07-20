@@ -25,16 +25,12 @@
 <style>
     #fab {
         position: fixed;
-        font-size: 21px;
-        line-height: 55px;
-        text-align: center;
-        color: white;
-        background-color: cyan;
-        width: 55px;
-        height: 55px;
-        position:fixed;
         right: 3vw;
         bottom: 20vh;
+        display: block;
+        width: 55px;
+        height: 55px;
+        background-color: cyan;
         border-radius: 50%;
         z-index: 10;
         box-shadow:0px 3px 10px rgba(0,0,0, 0.3);
@@ -48,11 +44,13 @@
         transform: rotate(-360deg);
     }
 
-    #fab b-icon{
+    #fab .icon{
+        display: flex;
         color: white;
-        line-height: 56px;
-        vertical-align: middle;
-        font-size: 18px;
+        height:100%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
     }
 
     

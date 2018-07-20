@@ -44,7 +44,6 @@ export default {
         height:100%;
         justify-content: center;
         align-items: center;
-        color: white;
     }
 
     #app-header .modal-card-title img{

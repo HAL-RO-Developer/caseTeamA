@@ -24,7 +24,7 @@ export default {
         if(!http.GetToken()){
             this.$router.push({ path: '/login' })
         }else{
-            this.$router.push({ path: '/device' })
+            this.$router.push({ path: '/records' })
         }
     }
 }
