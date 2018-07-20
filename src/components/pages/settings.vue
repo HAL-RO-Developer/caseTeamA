@@ -3,7 +3,7 @@
         <app-header :title='title'></app-header>
         <div class="contents">
             <div class="buttons" v-for="item in menu_items" :key="item.id">
-                <span class="button is-medium full-width" @click="click(item.id)">
+                <span class="button is-medium is-success full-width" @click="click(item.id)">
                     <b-icon :icon="item.icon"></b-icon>
                     <span style="padding-left:.5vh;">{{item.title}}</span>
                 </span>

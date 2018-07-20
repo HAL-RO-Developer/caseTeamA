@@ -26,7 +26,7 @@
     #fab {
         position: fixed;
         right: 3vw;
-        bottom: 20vh;
+        bottom: 18vh;
         display: block;
         width: 55px;
         height: 55px;
