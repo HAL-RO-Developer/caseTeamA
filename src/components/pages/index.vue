@@ -1,7 +1,7 @@
 <template>
     <div>
-        <app-header></app-header>
-        <under-tab :index='1'></under-tab>
+        <app-header ></app-header>
+        <under-tab></under-tab>
         <app-footer></app-footer>
     </div>
 </template>

@@ -35,7 +35,8 @@ export default {
                 { id:1, title:'子ども一覧', icon:'human-child' },
                 { id:2, title:'メッセージ設定', icon:'message-outline' },
                 //{ id:3, title:'取扱説明書' icon:'note'},
-                { id:4, title:'ログアウト', icon:'logout-variant'}
+                { id:4, title:'BOCCOとつなげる', icon:'robot'},
+                { id:5, title:'ログアウト', icon:'logout-variant'}
             ]
         }
     },
@@ -50,6 +51,9 @@ export default {
                     break;
                 case 3:
                     this.$router.push({path:"/manual"})
+                    break;
+                case 4:
+                    this.$router.push({path:"/bocco"})
                     break;
                 default:
                     http.RemoveToken()

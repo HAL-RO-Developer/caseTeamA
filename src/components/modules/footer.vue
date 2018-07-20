@@ -63,6 +63,6 @@ export default {
     }
 
     #app-footer img{
-        height: 75%;
+        height: 40%;
     }
 </style>
