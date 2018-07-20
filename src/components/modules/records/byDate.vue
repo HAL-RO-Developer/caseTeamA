@@ -31,7 +31,8 @@ export default {
                 week:[],
                 week_range:"",
                 solved:[],
-                correct:[]
+                correct:[],
+                max:0
             },
         }
     },
@@ -73,7 +74,7 @@ export default {
                             position: "left",
                             ticks:{
                                 min: 0,
-                                max: 30,
+                                max: this.values.max,
                             }
                         }
                     ],
@@ -93,6 +94,7 @@ export default {
         aggregate(records,date){
             this.records = records
             var m = moment(date).day(1)
+            var max = 0
             for( var i = 0; i < 7; i++, m.add(1,"day") ){
                 this.values.week[i] = m.format('MM/DD')
                 this.values.solved[i] = 0
@@ -101,9 +103,13 @@ export default {
                     if( moment(record.date).isSame(m,'day') ){
                         this.values.solved[i] = Number(record.num_ans)
                         this.values.correct[i] = Number(record.num_corr)
+                        if( max < this.values.solved[i] ){
+                            max = this.values.solved[i]
+                        } 
                     }
                 })                
             }
+            this.values.max = ( max + 10 ) - ( ( max + 10 ) % 10 ) 
             this.values.week_range = this.values.week[0] + " ~ " + this.values.week[i-1]
             this.fillData()
         },
