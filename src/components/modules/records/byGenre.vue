@@ -1,8 +1,20 @@
 <template>
     <div style="position:relative;">
         <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="true"></b-loading>
-        <graph :chartData='chartData' :options='options' :width="900" :height="750"></graph>
-    </div>
+        <graph :chartData='chartData' :options='options' :width="900" :height="680"></graph>
+        <b-collapse :open="false">
+            <button class="button is-success" style="margin-bottom:1vh;" type="button" slot="trigger">
+                <b-icon icon="note"></b-icon>
+                <span style="padding-left:.5vh;">グラフの解説</span>
+            </button>
+            <b-notification type="is-success" :closable="false">
+                <h3 class="title is-6"><b>回答率：</b></h3>
+                <p class="subtitle is-6">　全問題数あたりの回答数の割合(%)</p>
+                <h3 class="title is-6"><b>正答率：</b></h3>
+                <p class="subtitle is-6">　回答問題数あたりの正答数の割合(%)</p>
+            </b-notification>
+        </b-collapse>
+        </div>
 </template>
 <script>
 import http from '../../../service/service';
@@ -23,7 +35,8 @@ export default {
                 problem:[],
                 solved:[],
                 correct:[],
-                rate:[]
+                prate:[],
+                srate:[]
             },
         }
     },
@@ -32,36 +45,24 @@ export default {
             var problem_data = this.values.problem
             var solved_data = this.values.solved
             var correct_data = this.values.correct    
-            var rate_data = this.values.rate          
+            var prate_data = this.values.prate
+            var srate_data = this.values.srate          
             var datasets = [
-                /*
                 {
-                    label: '回答数',
-                    type: 'bar',
-                    data: solved_data,
-                    borderColor: "rgba(254,97,132,0.8)",
-                    backgroundColor: "rgba(254,97,132,0.5)",
-                    yAxisID: "count-axis"
+                    label: '回答率',
+                    type: 'radar',
+                    data: prate_data,
+                    borderColor: "rgba(54,164,235,0.8)",
+                    backgroundColor: "rgba(54,164,235,0.2)",
                 },
-                {
-                    label: '正答数',
-                    type: 'line',
-                    data: correct_data,
-                    borderColor: "rgba(54,164,235,1.0)",
-                    pointBackgroundColor: "rgba(54,164,235,1.0)",
-                    fill: false,
-                    lineTension: 0,
-                    yAxisID: "count-axis"
-                }
-                */
                 {
                     label: '正答率',
                     type: 'radar',
-                    data: rate_data,
+                    data: srate_data,
                     borderColor: "rgba(254,97,132,0.8)",
-                    backgroundColor: "rgba(254,97,132,0.5)",
-                    yAxisID: "count-axis"
+                    backgroundColor: "rgba(254,97,132,0.2)",
                 },
+                
             ]
 
             var labels=[];
@@ -90,15 +91,17 @@ export default {
             for( var i = 0; i < this.values.genre.length; i++){
                 this.values.solved[i] = 0
                 this.values.correct[i] = 0
-                this.values.rate[i] = 0
+                this.values.srate[i] = 0
+                this.values.prate[i] = 0
                 records.forEach((record)=>{
                     if(record.genre==this.values.genre[i].genre_name){
-                        this.values.problem[i] = Number(record.num_problem)
+                        this.values.problem[i] = Number(record.num_problems)
                         this.values.solved[i] = Number(record.num_ans)
                         this.values.correct[i] = Number(record.num_corr)
                     }
                 })
-                this.values.rate[i] = this.values.correct[i] / this.values.solved[i] * 100               
+                this.values.srate[i] = Math.round( this.values.correct[i] / this.values.solved[i] * 10000 ) / 100
+                this.values.prate[i] = Math.round( this.values.solved[i] / this.values.problem[i] * 10000 ) / 100              
             }
             this.fillData()
         }, 
