@@ -13,7 +13,6 @@
                 </div>
                 <div class="media-content">
                     <p class="title is-4">{{child.nickname}}</p>
-                    <!--<p class="subtitle is-6">ID:{{child.child_id}}</p>-->
                 </div>
                 <b-icon v-if="selected==child.child_id" icon="check"></b-icon>
                 <div class="media-right">

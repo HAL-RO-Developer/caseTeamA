@@ -83,7 +83,6 @@ export default {
                         this.showSolvedList(e, el)
                     } 
             }
-            //this.isLoading = false
             this.$emit('isLoading')
         },
         showSolvedList(e,el){

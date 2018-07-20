@@ -3,27 +3,6 @@
         <app-header :title='title'></app-header>
         <div class="contents">
             <section class="modal-card-body">
-                    <!--
-                    <b-field label="E-mail">
-                        <b-input
-                                type="email"
-                                v-model="email"
-                                placeholder="Your E-mail"
-                                size="is-medium"
-                                required>
-                        </b-input>
-                    </b-field>
-                    <b-field label="Password">
-                        <b-input
-                                type="password"
-                                v-model="password"
-                                password-reveal
-                                placeholder="Your password"
-                                size="is-medium"
-                                required>
-                        </b-input>
-                    </b-field>
-                    -->
                     <div v-if="email">
                         <button class="button is-danger is-medium full-width" style="margin-bottom:1vh;" type="button" @click="disconnect">
                             <b-icon icon="power-plug-off"></b-icon>
@@ -70,7 +49,6 @@
                     </b-collapse>
                 </section>
         </div>
-        <!--<img class="illust" src="/image/bocco.png">-->
         <under-tab :index='2'></under-tab>
         <app-footer></app-footer>
         
@@ -103,7 +81,6 @@ export default {
        connect(){
            http.connectBocco(this.form.email,this.form.password)
                 .then((response)=>{
-                    console.log(response)
                     this.getBocco()
                     this.$toast.open('接続しました')
                 })
@@ -167,7 +144,6 @@ export default {
        getBocco(){
             http.getBocco()
                 .then((response)=>{
-                    console.log(response.data)
                     this.email = response.data.email
                     localStorage.setItem("email", this.email);
                 })

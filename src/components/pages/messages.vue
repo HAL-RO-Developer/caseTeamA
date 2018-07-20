@@ -61,7 +61,6 @@
                 this.isComponentModalActive = false
                 http.addMessage(Number(this.child_id), Number(data.condition), Number(data.message_call), data.message )
                     .then((response)=>{
-                        console.log(response)
                         this.getMessage()
                     })
                     .catch((err)=>{
@@ -93,7 +92,6 @@
                     .then((response)=>{
                         this.isLoading = false
                         this.messages = response.data.messages
-                        //this.$ref.card.find()
                     })
                     .catch((err)=>{
                         this.isLoading = false
@@ -126,7 +124,6 @@
                 onConfirm: () => 
                     http.removeMessage(id)
                         .then((response)=>{
-                            console.log('delete')
                             this.getMessage()
                         })
                         .catch((err)=>{

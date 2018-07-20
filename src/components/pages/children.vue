@@ -81,7 +81,6 @@ export default {
         addChild(data){
             this.isComponentModalActive = false
             var birthday = moment(data.birthday)
-            console.log(data)
             http.addChild(data.nickname, birthday.format("YYYY-MM-DD"), Number(data.sex))
                 .then((response)=>{
                     this.getChild()

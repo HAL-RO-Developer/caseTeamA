@@ -5,9 +5,6 @@
             <b-icon icon="close"/>
             <img src="/image/logo_hal.png">
         </p>
-        <div class="buttons has-addons">
-            <!--<span class="button" @click="$router.go(-1)">戻る</span>-->
-        </div>
     </footer>
 </template>
 

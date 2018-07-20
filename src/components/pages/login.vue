@@ -24,7 +24,6 @@
                                 required>
                         </b-input>
                     </b-field>
-                    <!-- <b-checkbox>Remember me</b-checkbox> -->
                 </section>
                 <button class="button is-info is-medium full-width" style="margin-bottom:1vh;" type="button" @click="signup">
                     <b-icon icon="account-plus"></b-icon>
@@ -36,7 +35,6 @@
                 </button>
             </div>
             <img class="illust-left" src="/image/bocco.png">
-            <!--<img class="illust-right" src="/image/drill.png">-->
             <app-footer></app-footer>
         </div>
     </form>
@@ -63,7 +61,6 @@ export default {
         signup(){
             http.signup(this.name, this.password)
             .then((response)=>{
-                console.log(response)
                 this.$dialog.alert({
                         title: 'ユーザー作成',
                         message: response.data.success,
@@ -134,14 +131,5 @@ export default {
         transform: rotate(15deg);
         filter: drop-shadow(3px 0 2px #999999);
         z-index:30;
-    }
-    .illust-right{
-        position: fixed;
-        right: -3vw;
-        top: 3vh;
-        width: 30vw;
-        -webkit-transform: rotate(15deg);
-        -ms-transform: rotate(15deg);
-        transform: rotate(15deg);
     }
 </style>

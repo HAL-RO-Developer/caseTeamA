@@ -1,5 +1,4 @@
 <script>
-// CommitChart.js
 import { Bar, mixins } from 'vue-chartjs'
 
 export default {

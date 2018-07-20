@@ -27,7 +27,6 @@
         methods:{
         },
         created() {
-            console.log(this.detail)
             this.res = ( this.detail.result ) ? {
                 icon: "circle-outline",
                 type: "is-info",

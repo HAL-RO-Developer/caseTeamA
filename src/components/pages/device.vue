@@ -68,7 +68,6 @@ export default {
             this.isLoading = true
             http.getDevice()
                 .then((response)=>{
-                    console.log(response)
                     this.isLoading = false
                     var devices = response.data.devices
                     devices.forEach((device)=>{
@@ -101,7 +100,6 @@ export default {
         registDevice(){
             http.registDevice(Number(this.child_id))
                 .then((response)=>{
-                    console.log(response.data)
                     this.pin = response.data.pin
                     this.alertCustom()
                 })
@@ -135,7 +133,6 @@ export default {
                 onConfirm: () => 
                     http.removeDevice(id)
                         .then((response)=>{
-                            console.log('delete')
                             this.getDevice()
                         })
                         .catch((err)=>{

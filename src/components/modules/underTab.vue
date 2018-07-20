@@ -17,11 +17,9 @@ export default {
     },
     created(){
         this.IndexModel = this.index
-        //this.change()
     },
     methods:{
         change(){
-            // this.$router.push({path:"/login"})
             switch (this.IndexModel) {
                 case 0:
                     this.$router.push({path:"/pages/device"})

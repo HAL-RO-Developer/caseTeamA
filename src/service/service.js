@@ -9,7 +9,6 @@ class Http{
     Load(){
         this.api = axios.create({
             baseURL: localStorage.getItem('server'), 
-            //baseURL: 'https://caseteamaserver-lyozxwqhak.now.sh',
             headers: {
               'ContentType': 'application/json',
               'Authorization': this.GetToken()
@@ -72,82 +71,6 @@ class Http{
                 filter
             }
         })
-        /*
-        return new Promise((res, rej)=>{
-            var response = {
-                    data:{
-                        
-                        records: [
-                            {
-                                date: "2018-07-02T13:35:08+09:00",
-                                solved: "10",
-                                correct: "5"
-                            },
-                            {
-                                date: "2018-07-03T13:35:08+09:00",
-                                solved: "5",
-                                correct: "3"
-                            },
-                            {
-                                date: "2018-07-05T13:35:08+09:00",
-                                solved: "7",
-                                correct: "7"
-                            },
-                            {
-                                date: "2018-07-06T13:35:08+09:00",
-                                solved: "15",
-                                correct: "2"
-                            },
-                            {
-                                date: "2018-07-08T13:35:08+09:00",
-                                solved: "12",
-                                correct: "6"
-                            },
-                            {
-                                date: "2018-07-09T13:35:08+09:00",
-                                solved: "20",
-                                correct: "18"
-                            },
-                            {
-                                date: "2018-07-10T13:35:08+09:00",
-                                solved: "12",
-                                correct: "0"
-                            },
-                            {
-                                date: "2018-07-13T13:35:08+09:00",
-                                solved: "5",
-                                correct: "4"
-                            }
-
-                        ]
-                        /*
-                        records: [
-                            {
-                                genre: "1",
-                                solved: "10",
-                                correct: "5"
-                            },
-                            {
-                                genre: "2",
-                                solved: "5",
-                                correct: "3"
-                            },
-                            {
-                                genre: "3",
-                                solved: "7",
-                                correct: "7"
-                            },
-                            {
-                                genre: "4",
-                                solved: "15",
-                                correct: "2"
-                            },
-                        ]
-                    }
-            }
-            res(response)
-        })
-        */
     }
     getDetail(child_id, date, genre){
         return  this.api.get('/work/detail/'+child_id,{

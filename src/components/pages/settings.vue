@@ -9,7 +9,6 @@
                 </span>
             </div>
         </div>
-        <!--<img class="illust" src="/image/drill.png">-->
         <under-tab :index='2'></under-tab>
         <app-footer></app-footer>
         
@@ -34,8 +33,8 @@ export default {
             menu_items: [
                 { id:1, title:'子ども一覧', icon:'human-child' },
                 { id:2, title:'メッセージ設定', icon:'message-outline' },
-                //{ id:3, title:'取扱説明書' icon:'note'},
-                { id:4, title:'BOCCOとつなげる', icon:'robot'},
+                { id:3, title:'BOCCOとつなげる', icon:'robot'},
+                //{ id:4, title:'取扱説明書' icon:'note'},
                 { id:5, title:'ログアウト', icon:'logout-variant'}
             ]
         }
@@ -50,10 +49,10 @@ export default {
                     this.$router.push({path:"/pages/messages"})
                     break;
                 case 3:
-                    this.$router.push({path:"/pages/manual"})
+                    this.$router.push({path:"/pages/bocco"})
                     break;
                 case 4:
-                    this.$router.push({path:"/pages/bocco"})
+                    this.$router.push({path:"/pages/manual"})
                     break;
                 default:
                     http.RemoveToken()
