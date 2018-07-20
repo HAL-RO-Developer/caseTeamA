@@ -29,12 +29,11 @@ export default {
     created(){
         if(!http.GetToken()){
             this.$router.push({ path: '/login' })
-        }
-        /*
-        else{
+        }else if(!localStorage.getItem('child_id')){
+            this.$router.push({ path: '/children' })
+        }else{
             this.$router.push({ path: '/records' })
         }
-        */
     }
 }
 </script>
