@@ -70,14 +70,13 @@ func GetBoccoToken(email string, key string, pass string) (string, bool) {
 }
 
 // ルームID取得
-func GetRoomId(token string) (string, bool) {
+func GetRoomId(token string, childId int) (string, bool) {
 	var data interface{}
 	values := url.Values{}
 	values.Add("access_token", token)
 
 	resp, err := http.Get(roomIdURL + "?" + values.Encode())
 	if err != nil {
-		fmt.Println(err)
 		return "", false
 	}
 
@@ -93,8 +92,8 @@ func GetRoomId(token string) (string, bool) {
 		return "", false
 	}
 
-	roomId := data.([]interface{})[0].(map[string]interface{})["uuid"].(string)
-
+	roomId := data.([]interface{})[childId - 1].(map[string]interface{})["uuid"].(string)
+	
 	return roomId, true
 }
 

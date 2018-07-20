@@ -56,7 +56,7 @@ func (b *boccoimpl) GetBoccoInfo(c *gin.Context) {
 
 	info, find := service.ExisByBoccoAPI(name)
 	if !find {
-		response.BadRequest(gin.H{"error": "BOCCOAPI設定が見つかりませんでした。"}, c)
+		response.Json(gin.H{"email": ""}, c)
 		return
 	}
 
