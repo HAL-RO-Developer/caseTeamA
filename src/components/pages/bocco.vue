@@ -173,6 +173,7 @@ export default {
                 })
                 .catch((err)=>{
                     this.isLoading = false
+                    localStorage.removeItem('email')
                     if(err){
                         this.$dialog.alert({
                             title: 'Error',
@@ -195,7 +196,6 @@ export default {
     },
     created(){
         this.getBocco();
-        this.email = localStorage.getItem("email");
     }
 }
 </script>

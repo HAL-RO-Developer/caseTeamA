@@ -133,6 +133,7 @@ export default {
         -ms-transform: rotate(15deg);
         transform: rotate(15deg);
         filter: drop-shadow(3px 0 2px #999999);
+        z-index:30;
     }
     .illust-right{
         position: fixed;

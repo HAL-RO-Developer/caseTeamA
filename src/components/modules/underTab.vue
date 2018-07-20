@@ -50,6 +50,8 @@ export default {
 <style>
     #undertab {
         position: relative;
+        
+        z-index: 10;
     }
 
     .b-tabs{
@@ -68,6 +70,9 @@ export default {
         padding: 0;
     }
 
+    .tabs.is-toggle li a {
+        background-color: #FFFFFF;
+    }
     .tabs.is-toggle li.is-active a {
         background-color: #88CC29;
         border-color: #88CC29;
