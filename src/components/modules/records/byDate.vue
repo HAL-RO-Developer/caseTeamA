@@ -91,9 +91,6 @@ export default {
             if (! el || el.length == 0) return;
             console.log(el)
             var date = moment(el[1]._model.label,"MM/DD").format("MMDD")
-
-            console.log(date)
-
             this.$router.push({path: '/pages/records/date/' + date})
         },
         aggregate(records,date){
@@ -130,7 +127,6 @@ export default {
     },
     created() {
         this.child_id = localStorage.getItem('child_id')
-        //this.aggregate()
     },
     
     props: ["isLoading"]
