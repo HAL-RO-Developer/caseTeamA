@@ -42,14 +42,6 @@ export default {
             var correct_data = this.values.correct           
             var datasets = [
                 {
-                    label: '回答数',
-                    type: 'bar',
-                    data: solved_data,
-                    borderColor: "rgba(254,97,132,0.8)",
-                    backgroundColor: "rgba(254,97,132,0.5)",
-                    yAxisID: "count-axis"
-                },
-                {
                     label: '正答数',
                     type: 'line',
                     data: correct_data,
@@ -58,7 +50,16 @@ export default {
                     fill: false,
                     lineTension: 0,
                     yAxisID: "count-axis"
-                }
+                },
+                {
+                    label: '回答数',
+                    type: 'bar',
+                    data: solved_data,
+                    borderColor: "rgba(254,97,132,0.8)",
+                    backgroundColor: "rgba(254,97,132,0.5)",
+                    yAxisID: "count-axis"
+                },
+                
             ]
 
             this.chartData = {
