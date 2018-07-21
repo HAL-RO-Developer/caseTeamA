@@ -132,7 +132,7 @@ func (r *recordimpl) WorkRecordForDetail(c *gin.Context) {
 	buf := c.Param("child_id")
 	childId, err := strconv.Atoi(buf)
 	if err != nil {
-		response.BadRequest(gin.H{"error": "childIdが不正です。"}, c)
+		response.BadRequest(gin.H{"error": "子どもを選択して下さい。"}, c)
 		return
 	}
 
@@ -147,12 +147,12 @@ func (r *recordimpl) WorkRecordForDetail(c *gin.Context) {
 	genre, error := strconv.Atoi(hoge)
 	if day == "" {
 		if error != nil {
-			response.BadRequest(gin.H{"error": "クエリパラメータが不正です。"}, c)
+			response.BadRequest(gin.H{"error": "日付けを選択して下さい。"}, c)
 			return
 		}
 	} else if hoge == "" {
 		if err != nil {
-			response.BadRequest(gin.H{"error": "クエリパラメータが不正です。"}, c)
+			response.BadRequest(gin.H{"error": "ジャンルを選択して下さい。"}, c)
 			return
 		}
 	}

@@ -25,7 +25,7 @@ func (q *questionimpl) CreateQuestion(c *gin.Context) {
 
 	genreData := service.GetGenreData(req.GenreId)
 	if len(genreData) == 0 {
-		response.BadRequest(gin.H{"error": "そのジャンルIDは存在しません。"}, c)
+		response.BadRequest(gin.H{"error": "そのジャンルは存在しません。"}, c)
 		return
 	}
 	findBook := service.GetBookInfo(req.BookId, req.GenreId)
@@ -37,7 +37,7 @@ func (q *questionimpl) CreateQuestion(c *gin.Context) {
 
 	findTagId := service.GetSentenceInfo(req.Sentence[0].TagId)
 	if findTagId {
-		response.BadRequest(gin.H{"error": "そのタグIDは登録済みです。"}, c)
+		response.BadRequest(gin.H{"error": "そのタグは登録済みです。"}, c)
 		return
 	}
 

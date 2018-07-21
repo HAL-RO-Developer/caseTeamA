@@ -27,13 +27,13 @@ func (b *boccoimpl) RegistBocco(c *gin.Context) {
 
 	_, find := service.ExisByBoccoAPI(name)
 	if find {
-		response.BadRequest(gin.H{"error": "BOCCOAPI設定登録済みです。"}, c)
+		response.Json(gin.H{"success": "BOCCOAPI設定登録済みです。"}, c)
 		return
 	}
 
 	_, ok = service.GetBoccoToken(req.Email, service.APIKEY, req.Password)
 	if !ok {
-		response.BadRequest(gin.H{"error": "アクセストークンが取得できませんでした。"}, c)
+		response.BadRequest(gin.H{"error": "BOCCOAPIのアクセストークンが取得できませんでした。"}, c)
 		return
 	}
 

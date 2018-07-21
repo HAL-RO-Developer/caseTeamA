@@ -135,7 +135,7 @@ func (u *userimpl) DeleteChild(c *gin.Context) {
 
 	success := service.DeleteChild(name, childId)
 	if !success {
-		response.BadRequest(gin.H{"error": "子どもIDが見つかりませんでした。"}, c)
+		response.BadRequest(gin.H{"error": "子どもを選択して下さい。"}, c)
 		return
 	}
 	response.Json(gin.H{"success": "削除しました。"}, c)

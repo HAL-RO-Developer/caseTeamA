@@ -19,14 +19,14 @@ func (r *readerimpl) SendTag(c *gin.Context) {
 	var msg string
 	req, ok := validation.ReaderValidation(c)
 	if !ok {
-		response.BadRequest(gin.H{"error": "不正なリクエストです。"}, c)
+		response.BadRequest(gin.H{"error": "アクセストークンが不正です。"}, c)
 		return
 	}
 
 	device, find := service.GetDeviceInfoFromDeviceId(req.DeviceId)
 
 	if !find {
-		response.BadRequest(gin.H{"error": "デバイスIDが見つかりませんでした"}, c)
+		response.BadRequest(gin.H{"error": "デバイスが見つかりませんでした"}, c)
 		return
 	}
 	_, result := service.SendUserAnswer(req.DeviceId, req.Uuid, req.OldUuid)
