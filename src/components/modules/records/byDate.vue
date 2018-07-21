@@ -89,7 +89,6 @@ export default {
         },
         showSolvedList(e,el){
             if (! el || el.length == 0) return;
-            console.log(el)
             var date = moment(el[1]._model.label,"MM/DD").format("MMDD")
             this.$router.push({path: '/pages/records/date/' + date})
         },
