@@ -31,7 +31,7 @@ export default {
         return {
             title:"設定",
             menu_items: [
-                { id:1, title:'子ども一覧', icon:'human-child' },
+                { id:1, title:'子ども一覧', icon:'face' },
                 { id:2, title:'メッセージ設定', icon:'message-outline' },
                 { id:3, title:'BOCCOとつなげる', icon:'robot'},
                 //{ id:4, title:'取扱説明書' icon:'note'},
