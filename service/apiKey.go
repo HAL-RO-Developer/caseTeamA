@@ -1,0 +1,3 @@
+package service
+
+const APIKEY = "qN3ZK8KzVWwEGi4vZxfYKivwR46xvbBLMj2IA7LPy9vCNOOHEayMWsPQEyfsVdFb"

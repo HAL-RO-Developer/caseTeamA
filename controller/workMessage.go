@@ -91,7 +91,7 @@ func (w *workmessageimpl) GetMessage(c *gin.Context) {
 	buf := c.Param("child_id")
 	childId, err := strconv.Atoi(buf)
 	if err != nil {
-		response.BadRequest(gin.H{"error": "childIdが不正です。"}, c)
+		response.BadRequest(gin.H{"error": "子どもを選択して下さい。"}, c)
 		return
 	}
 
