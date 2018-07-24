@@ -20,3 +20,6 @@ docker/push:
 	make -f .circleci/ci.mk docker/build
 	make -f .circleci/ci.mk login
 	make -f .circleci/ci.mk docker/push
+
+docker/tag:
+    docker tag casea:latest 429564250042.dkr.ecr.ap-northeast-1.amazonaws.com/casea:latest

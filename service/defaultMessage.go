@@ -42,7 +42,7 @@ func GetDefaultMessage(birthday time.Time, continueAns int, bookId int, result i
 		if !find {
 			return model.DefaultMessage{}, MessageVariable{}, false
 		}
-		return messages[getRandomNo(len(useCondition) - 1)], msgVariable, true
+		return messages[getRandomNo(len(messages))], msgVariable, true
 	}
 
 	return model.DefaultMessage{}, MessageVariable{}, false

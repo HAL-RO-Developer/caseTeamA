@@ -104,10 +104,10 @@ func (d *deviceimpl) DeleteDevice(c *gin.Context) {
 	deviceId := c.Param("device_id")
 
 	if service.DeleteDeviceId(name, deviceId) {
-		response.Json(gin.H{"success": "デバイスIDを削除しました。"}, c)
+		response.Json(gin.H{"success": "デバイスを削除しました。"}, c)
 		return
 	}
-	response.BadRequest(gin.H{"error": "デバイスIDが見つかりません。"}, c)
+	response.BadRequest(gin.H{"error": "デバイスが見つかりません。"}, c)
 }
 
 // デバイスとIDの紐付け

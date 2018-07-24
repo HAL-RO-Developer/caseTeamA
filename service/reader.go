@@ -44,7 +44,7 @@ func SendUserAnswer(deviceId string, tagUuid string, oldUuid string) (model.Reco
 		boccoInfo, find := ExisByBoccoAPI(bocco[0].Name)
 		if find {
 			boccoToken, _ := GetBoccoToken(boccoInfo[0].Email, APIKEY, boccoInfo[0].Pass)
-			roomId, _ := GetRoomId(boccoToken)
+			roomId, _ := GetRoomId(boccoToken, bocco[0].ChildId)
 			uuid := uuid.Must(uuid.NewV4()).String()
 			SendMessage(uuid, roomId, boccoToken, tagInfo.Phonetic)
 		}

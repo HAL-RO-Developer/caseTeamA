@@ -106,7 +106,6 @@ Temporary Items
 
 #### 追加ignore
 main
-index.bundle.js.map
-index.bundle.js
 config.yml
-apiKey.go
+index.bundle.js
+index.bundle.js.map

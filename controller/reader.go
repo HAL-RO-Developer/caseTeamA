@@ -19,14 +19,14 @@ func (r *readerimpl) SendTag(c *gin.Context) {
 	var msg string
 	req, ok := validation.ReaderValidation(c)
 	if !ok {
-		response.BadRequest(gin.H{"error": "不正なリクエストです。"}, c)
+		response.BadRequest(gin.H{"error": "アクセストークンが不正です。"}, c)
 		return
 	}
 
 	device, find := service.GetDeviceInfoFromDeviceId(req.DeviceId)
 
 	if !find {
-		response.BadRequest(gin.H{"error": "デバイスIDが見つかりませんでした"}, c)
+		response.BadRequest(gin.H{"error": "デバイスが見つかりませんでした"}, c)
 		return
 	}
 	_, result := service.SendUserAnswer(req.DeviceId, req.Uuid, req.OldUuid)
@@ -79,7 +79,7 @@ func (r *readerimpl) SendTag(c *gin.Context) {
 	} else {
 		msg = message[0].Message
 	}
-	talkBocco(msg, device[0].Name)
+	talkBocco(msg, device[0].Name, device[0].ChildId)
 	if result == 2 || result == 3 {
 		response.Json(gin.H{"success": false}, c)
 		return
@@ -87,14 +87,14 @@ func (r *readerimpl) SendTag(c *gin.Context) {
 	response.Json(gin.H{"success": true}, c)
 }
 
-func talkBocco(message string, name string) {
+func talkBocco(message string, name string, childId int) {
 	fmt.Println(message)
 	boccoInfo, find := service.ExisByBoccoAPI(name)
 	if !find {
 		return
 	}
 	boccoToken, _ := service.GetBoccoToken(boccoInfo[0].Email, service.APIKEY, boccoInfo[0].Pass)
-	roomId, _ := service.GetRoomId(boccoToken)
+	roomId, _ := service.GetRoomId(boccoToken, childId)
 	uuid := uuid.Must(uuid.NewV4()).String()
 	service.SendMessage(uuid, roomId, boccoToken, message)
 }
