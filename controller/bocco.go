@@ -5,6 +5,7 @@ import (
 	"github.com/HAL-RO-Developer/caseTeamA/controller/validation"
 	"github.com/HAL-RO-Developer/caseTeamA/service"
 	"github.com/gin-gonic/gin"
+	"github.com/makki0205/config"
 )
 
 var Bocco = boccoimpl{}
@@ -31,7 +32,7 @@ func (b *boccoimpl) RegistBocco(c *gin.Context) {
 		return
 	}
 
-	_, ok = service.GetBoccoToken(req.Email, service.APIKEY, req.Password)
+	_, ok = service.GetBoccoToken(req.Email, config.Env("apikey"), req.Password)
 	if !ok {
 		response.BadRequest(gin.H{"error": "BOCCOAPIのアクセストークンが取得できませんでした。"}, c)
 		return

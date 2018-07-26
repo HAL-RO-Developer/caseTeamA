@@ -6,6 +6,7 @@ import (
 	"github.com/HAL-RO-Developer/caseTeamA/model"
 	"github.com/satori/go.uuid"
 	_ "github.com/satori/go.uuid"
+	"github.com/makki0205/config"
 )
 
 // ユーザーの回答データ送信
@@ -43,7 +44,7 @@ func SendUserAnswer(deviceId string, tagUuid string, oldUuid string) (model.Reco
 		}
 		boccoInfo, find := ExisByBoccoAPI(bocco[0].Name)
 		if find {
-			boccoToken, _ := GetBoccoToken(boccoInfo[0].Email, APIKEY, boccoInfo[0].Pass)
+			boccoToken, _ := GetBoccoToken(boccoInfo[0].Email, config.Env("apikey"), boccoInfo[0].Pass)
 			roomId, _ := GetRoomId(boccoToken, bocco[0].ChildId)
 			uuid := uuid.Must(uuid.NewV4()).String()
 			SendMessage(uuid, roomId, boccoToken, tagInfo.Phonetic)

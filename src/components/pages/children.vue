@@ -1,4 +1,4 @@
-<template>
+"<template>
     <div class="modal-card" style="width: auto">
         <app-header :title='title'></app-header>
         <div class="contents">

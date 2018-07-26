@@ -7,6 +7,7 @@ import (
 	"github.com/HAL-RO-Developer/caseTeamA/service"
 	"github.com/gin-gonic/gin"
 	"github.com/satori/go.uuid"
+	"github.com/makki0205/config"
 )
 
 var Reader = readerimpl{}
@@ -93,7 +94,7 @@ func talkBocco(message string, name string, childId int) {
 	if !find {
 		return
 	}
-	boccoToken, _ := service.GetBoccoToken(boccoInfo[0].Email, service.APIKEY, boccoInfo[0].Pass)
+	boccoToken, _ := service.GetBoccoToken(boccoInfo[0].Email, config.Env("apikey"), boccoInfo[0].Pass)
 	roomId, _ := service.GetRoomId(boccoToken, childId)
 	uuid := uuid.Must(uuid.NewV4()).String()
 	service.SendMessage(uuid, roomId, boccoToken, message)
