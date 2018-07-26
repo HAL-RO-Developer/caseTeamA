@@ -85,7 +85,6 @@ func GetMessageInfoFromTrue(name string, childId int, result int) ([]model.Custo
 	return messages, len(messages) != 0
 }
 
-
 // メッセージID作成
 func CreateWorkMessageId() string {
 	var messageId string

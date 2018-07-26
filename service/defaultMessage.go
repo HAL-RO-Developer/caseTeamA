@@ -38,23 +38,23 @@ func GetDefaultMessage(birthday time.Time, continueAns int, bookId int, result i
 	// 満たしている条件を取得
 	useCondition, msgVariable = getCondition(condition)
 	if len(useCondition) != 0 {
-		messages, find := getMessage(useCondition[getRandomNo(len(useCondition))])
+		messages, find := GetMessage(useCondition[GetRandomNo(len(useCondition))])
 		if !find {
 			return model.DefaultMessage{}, MessageVariable{}, false
 		}
-		return messages[getRandomNo(len(messages))], msgVariable, true
+		return messages[GetRandomNo(len(messages))], msgVariable, true
 	}
 
 	return model.DefaultMessage{}, MessageVariable{}, false
 }
 
-func getMessage(condition int) ([]model.DefaultMessage, bool) {
+func GetMessage(condition int) ([]model.DefaultMessage, bool) {
 	var message []model.DefaultMessage
 	db.Where("msg_condition = ?", condition).Find(&message)
 	return message, len(message) != 0
 }
 
-func getRandomNo(num int) int {
+func GetRandomNo(num int) int {
 	rand.Seed(time.Now().UnixNano())
 	return rand.Intn(num)
 }

@@ -47,7 +47,6 @@ type Tag struct {
 	BookId     int    `json:"book_id"`
 	QuestionNo int    `json:"question_no"`
 	Sentence   string `json:"sentence"`
-	Phonetic   string `json:"phonetic"`
 	Answer     string `json:"answer"`
 }
 

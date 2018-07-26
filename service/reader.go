@@ -4,9 +4,7 @@ import (
 	"time"
 
 	"github.com/HAL-RO-Developer/caseTeamA/model"
-	"github.com/satori/go.uuid"
 	_ "github.com/satori/go.uuid"
-	"github.com/makki0205/config"
 )
 
 // ユーザーの回答データ送信
@@ -42,13 +40,7 @@ func SendUserAnswer(deviceId string, tagUuid string, oldUuid string) (model.Reco
 		if !find {
 			return model.Record{}, -4
 		}
-		boccoInfo, find := ExisByBoccoAPI(bocco[0].Name)
-		if find {
-			boccoToken, _ := GetBoccoToken(boccoInfo[0].Email, config.Env("apikey"), boccoInfo[0].Pass)
-			roomId, _ := GetRoomId(boccoToken, bocco[0].ChildId)
-			uuid := uuid.Must(uuid.NewV4()).String()
-			SendMessage(uuid, roomId, boccoToken, tagInfo.Phonetic)
-		}
+		TalkBocco(tagInfo.Sentence,bocco[0].Name)
 		return record, 4
 	} else {
 		if oldUuid == "" {
@@ -88,13 +80,15 @@ func judgeSentenceTag(tagId string) bool {
 func createRecord(name string, childId int, bookId int, questionNo int, tagUuid string) model.Record {
 	var correct bool
 	var record model.Record
-
+	
 	genreId := GetBookData(bookId)
-	correctId := GetByCorrect(bookId, questionNo)
-	if correctId == "" {
+	correctTag := GetByCorrect(bookId, questionNo)
+	correctId := GetTagDataFromTagId(correctTag)
+	answerId := GetTagDataFromUuid(tagUuid)
+	if correctTag == "" {
 		return model.Record{}
 	}
-	if correctId == tagUuid {
+	if correctId.Uuid == tagUuid {
 		correct = true
 	} else {
 		correct = false
@@ -106,7 +100,7 @@ func createRecord(name string, childId int, bookId int, questionNo int, tagUuid 
 		BookId:     bookId,
 		QuestionNo: questionNo,
 		GenreId:    genreId[0].GenreId,
-		UserAnswer: tagUuid,
+		UserAnswer: answerId.TagId,
 		Correct:    correct,
 	}
 	return record

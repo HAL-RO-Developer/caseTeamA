@@ -47,7 +47,6 @@ func SentenceGenerate(tagId string, bookId int, questionNo int, sentence string,
 		BookId:     bookId,     // ドリルId
 		QuestionNo: questionNo, // ドリルの問題番号
 		Sentence:   sentence,   // 問題文
-		Phonetic:   phonetic,
 	}
 
 	db.Create(&tag) // カラム作成

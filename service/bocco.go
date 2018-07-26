@@ -12,6 +12,8 @@ import (
 	"net/http/httputil"
 
 	"github.com/HAL-RO-Developer/caseTeamA/model"
+	"github.com/makki0205/config"
+	"github.com/satori/go.uuid"
 )
 
 type GetToken struct {
@@ -52,6 +54,10 @@ func GetBoccoToken(email string, key string, pass string) (string, bool) {
 		fmt.Println(err)
 		return "", false
 	}
+	if resp.Status == "401 Unauthorized"{
+		fmt.Println("401")
+		return "", false
+	}
 	defer resp.Body.Close()
 
 	b, err := ioutil.ReadAll(resp.Body)
@@ -70,7 +76,7 @@ func GetBoccoToken(email string, key string, pass string) (string, bool) {
 }
 
 // ルームID取得
-func GetRoomId(token string, childId int) (string, bool) {
+func GetRoomId(token string) (string, bool) {
 	var data interface{}
 	values := url.Values{}
 	values.Add("access_token", token)
@@ -92,7 +98,7 @@ func GetRoomId(token string, childId int) (string, bool) {
 		return "", false
 	}
 
-	roomId := data.([]interface{})[childId - 1].(map[string]interface{})["uuid"].(string)
+	roomId := data.([]interface{})[0].(map[string]interface{})["uuid"].(string)
 	return roomId, true
 }
 
@@ -137,4 +143,15 @@ func DeleteBoccoInfo(name string) {
 	var bocco model.Bocco
 	db.Where("name = ?", name).First(&bocco)
 	db.Delete(bocco)
+}
+
+func TalkBocco(message string, name string) {
+	boccoInfo, find := ExisByBoccoAPI(name)
+	if !find {
+		return
+	}
+	boccoToken, _ := GetBoccoToken(boccoInfo[0].Email, config.Env("apikey"), boccoInfo[0].Pass)
+	roomId, _ := GetRoomId(boccoToken)
+	uuid := uuid.Must(uuid.NewV4()).String()
+	SendMessage(uuid, roomId, boccoToken, message)
 }
